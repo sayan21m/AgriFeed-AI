@@ -81,4 +81,26 @@ class L10n {
   String get offlineNote => hi
       ? 'अज्ञात नाम कीवर्ड वर्ग से चलते हैं, ExtraTrees से नहीं। फफूंद रंग-जाँच है, CNN नहीं। AS7265x प्रोटीन नहीं। मॉडल फ़ोन पर हैं, बोर्ड पर नहीं।'
       : 'Unknown names use a keyword class, not ExtraTrees. Mould is a colour screen, not the CNN. AS7265x is not protein. Models stay on the phone, not the board.';
+
+  // QR tab
+  String get tabQr => hi ? 'बोरी जाँच' : 'Verify Bag';
+  String get qrTitle => hi ? 'QR से बोरी सत्यापन' : 'Bag verification via QR';
+  String get qrLead => hi
+      ? 'बोरी पर छपा QR कोड स्कैन करें। घोषित प्रोटीन और नमी की जाँच तालिका और सेंसर से होगी।'
+      : 'Scan the QR code printed on the bag. Declared protein and moisture will be checked against tables and sensors.';
+  String get qrScan => hi ? 'QR स्कैन करें' : 'Scan QR';
+  String get qrStop => hi ? 'बंद करें' : 'Stop';
+  String get qrDemo => hi ? 'डेमो' : 'Demo';
+  String get qrValid => hi ? 'बोरी सत्यापित' : 'Bag verified';
+  String get qrExpired => hi ? 'बोरी समाप्त' : 'Bag expired';
+  String get qrMfr => hi ? 'निर्माता' : 'Manufacturer';
+  String get qrBatch => hi ? 'बैच नं.' : 'Batch No.';
+  String get qrPack => hi ? 'पैकिंग तिथि' : 'Packed';
+  String get qrExpiry => hi ? 'समाप्ति तिथि' : 'Expiry';
+  String get qrDeclaredCp => hi ? 'घोषित CP' : 'Declared CP';
+  String get qrDeclaredMoist => hi ? 'घोषित नमी' : 'Declared moisture';
+  String get qrBis => hi ? 'BIS लाइसेंस' : 'BIS license';
+  String get qrNote => hi
+      ? 'प्रोटोटाइप QR — उत्पादन में हस्ताक्षरित पेलोड का उपयोग होगा।'
+      : 'Prototype QR — production systems would use signed payloads.';
 }

@@ -112,3 +112,23 @@ def test_assess_returns_spoken_paragraph():
     spoken = res.json()["spoken"]
     assert "mustard cake" in spoken["en"].lower()
     assert spoken["hi"]
+
+
+def test_assess_with_qr_payload():
+    from smartfeed.qr import generate_qr_payload
+
+    payload = generate_qr_payload({
+        "manufacturer": "Amul Feed",
+        "batch_no": "B101",
+        "declared_cp_pct_dm": 36.0,
+    })
+    res = client.post(
+        "/api/assess",
+        data={"ingredient": "mustard cake", "moisture_pct": 10, "qr_payload": payload},
+    )
+    assert res.status_code == 200
+    body = res.json()
+    assert body["modules"]["qr"]["present"] is True
+    assert body["modules"]["qr"]["verified"] is True
+    assert body["modules"]["qr"]["bag_info"]["manufacturer"] == "Amul Feed"
+

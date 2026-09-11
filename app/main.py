@@ -97,6 +97,7 @@ async def api_assess(
     grit_settled_ml: float | None = Form(None),
     sample_g: float | None = Form(None),
     nir_json: str | None = Form(None),
+    qr_payload: str | None = Form(None),
     photo: UploadFile | None = File(None),
 ):
     if form in ("", "none"):
@@ -133,6 +134,7 @@ async def api_assess(
             aia_pct=aia_pct,
             grit_settled_ml=grit_settled_ml,
             sample_g=sample_g,
+            qr_payload=qr_payload,
         )
     except SensorRangeError as exc:
         raise HTTPException(400, str(exc)) from exc

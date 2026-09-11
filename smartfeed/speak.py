@@ -78,6 +78,11 @@ def _english(name, action, farmer, nutrition, moisture, silage, nir, cv, ration,
     tips = ration.get("tips_en") or []
     if tips:
         parts.append(tips[0])
+    # Include mineral advisory tip if present (usually the 2nd or 3rd tip)
+    for tip in tips[1:]:
+        if "mineral" in tip.lower() or "calcium" in tip.lower():
+            parts.append(tip)
+            break
 
     reasons = farmer.get("reasons_en") or []
     if action != "feed" and reasons:
@@ -140,6 +145,10 @@ def _hindi(name, action, farmer, nutrition, moisture, silage, nir, cv, ration, r
     tips = ration.get("tips_hi") or []
     if tips:
         parts.append(tips[0])
+    for tip in tips[1:]:
+        if "खनिज" in tip or "कैल्शियम" in tip:
+            parts.append(tip)
+            break
 
     reasons = farmer.get("reasons_hi") or []
     if action != "feed" and reasons:

@@ -1,0 +1,15 @@
+Unsplash (https://unsplash.com/license), bundled for AgriFeed-AI UI:
+- hero_cattle.jpg  dairy herd on pasture
+- barn.jpg         cattle at dusk
+- cow.jpg          dairy cow portrait
+- grain.jpg        wheat grain (concentrate / compounded)
+- hay.jpg          ripe fodder field
+- forage.jpg       maize plants (silage crop)
+- silage.jpg       green crop beside dry crop
+
+App logo (logo.png) is the AgriFeed-AI mark (cow + wheat) used in the top bar and as the launcher icon.
+Older Gir-cow badge (mark.jpg) is unused in the UI.
+
+Fonts (SIL Open Font License), bundled for offline use:
+- Source Serif 4 (Adobe) — display
+- Hind (Indian Type Foundry) — UI Latin + Devanagari

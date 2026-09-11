@@ -9,6 +9,7 @@ from smartfeed.cv_mould import assess_image
 from smartfeed.moisture import assess_moisture
 from smartfeed.nir import assess_nir
 from smartfeed.nutrition import assess_nutrition
+from smartfeed.qr import verify_qr
 from smartfeed.ration import ration_advice
 from smartfeed.silage import assess_silage
 from smartfeed.speak import spoken_advice
@@ -57,6 +58,15 @@ def _decision(parts: dict) -> dict:
     if parts["aflatoxin"].get("high_risk_ingredient") and cv.get("flag"):
         triggers.append(("reject", "high-AF-risk ingredient plus mould"))
 
+    qr = parts.get("qr") or {}
+    if qr.get("decoded"):
+        if qr.get("expired"):
+            triggers.append(("dilute", "bag past expiry date (QR)"))
+        if qr.get("cp_mismatch"):
+            triggers.append(("dilute", "declared CP does not match tables (QR)"))
+        if qr.get("moisture_mismatch"):
+            triggers.append(("dilute", "declared moisture does not match measurement (QR)"))
+
     if not triggers:
         return {"action": "feed", "reasons": ["no reject/dilute trigger from sensors + tables"]}
 
@@ -81,6 +91,7 @@ def assess(
     aia_pct: float | None = None,
     grit_settled_ml: float | None = None,
     sample_g: float | None = None,
+    qr_payload: str | None = None,
 ) -> dict:
     """Run every module that has an input, then decide feed / dilute / reject."""
     sensor_warnings = check_all(
@@ -105,6 +116,11 @@ def assess(
     aflatoxin = assess_aflatoxin(ingredient, visible_mould=cv.get("flag") if cv.get("present") else visible_mould)
     nir = assess_nir(nir_absorbance)
     sand = assess_sand(aia_pct, grit_settled_ml, sample_g, form=form)
+    qr = (
+        verify_qr(qr_payload, nutrition)
+        if qr_payload
+        else {"present": False, "note": "No QR code scanned."}
+    )
 
     parts = {
         "nutrition": nutrition,
@@ -115,6 +131,7 @@ def assess(
         "aflatoxin": aflatoxin,
         "sand": sand,
         "nir": nir,
+        "qr": qr,
     }
     decision = _decision(parts)
     farmer = farmer_card(decision)
