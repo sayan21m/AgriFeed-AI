@@ -56,6 +56,18 @@ const reasonCopy = {
     'en': 'No reject or dilute trigger from the sensors and tables.',
     'hi': 'सेंसर और तालिका से कोई अस्वीकार संकेत नहीं।',
   },
+  'bag past expiry date (QR)': {
+    'en': 'Bag is past its expiry date (from QR code).',
+    'hi': 'बोरी की समाप्ति तिथि बीत चुकी है (QR कोड से)।',
+  },
+  'declared CP does not match tables (QR)': {
+    'en': 'Declared crude protein on the bag does not match Indian tables (QR check).',
+    'hi': 'बोरी पर लिखा प्रोटीन भारतीय तालिका से मेल नहीं खाता (QR जाँच)।',
+  },
+  'declared moisture does not match measurement (QR)': {
+    'en': 'Declared moisture on the bag does not match the sensor reading (QR check).',
+    'hi': 'बोरी पर लिखी नमी सेंसर रीडिंग से मेल नहीं खाती (QR जाँच)।',
+  },
 };
 
 const prefixes = {
@@ -145,6 +157,17 @@ Map<String, dynamic> rationAdvice(Map<String, dynamic> nutrition) {
   if (nutrition['method'] == 'keyword_class_fallback' || nutrition['method'] == 'best_cv_name_model') {
     tipsEn.add('This name was not in the Indian tables, so the figure is a guess from the name.');
     tipsHi.add('यह नाम भारतीय तालिका में नहीं था, इसलिए यह आँकड़ा नाम से लगाया गया अनुमान है।');
+  }
+  // --- Mineral deficiency advisory ---
+  if (feedClass == 'crop_residue' || feedClass == 'hay') {
+    tipsEn.add('This roughage is low in Calcium and Phosphorus. Add 50–100 g Area-Specific Mineral Mixture (ASMM) daily per animal.');
+    tipsHi.add('इस चारे में कैल्शियम और फ़ॉस्फ़ोरस कम है। प्रति पशु प्रतिदिन 50–100 ग्राम क्षेत्र-विशिष्ट खनिज मिश्रण (ASMM) दें।');
+  } else if (feedClass == 'grains') {
+    tipsEn.add('Grain-heavy diets lack minerals. Ensure a mineral mixture is part of the daily ration.');
+    tipsHi.add('अनाज-प्रधान आहार में खनिज कम होते हैं। दैनिक राशन में खनिज मिश्रण अवश्य शामिल करें।');
+  } else if (feedClass == 'oilcakes' && cp != null && cp > 30) {
+    tipsEn.add('High-protein cakes can have a Calcium–Phosphorus imbalance. Balance with a mineral supplement.');
+    tipsHi.add('अधिक प्रोटीन वाली खली में कैल्शियम-फ़ॉस्फ़ोरस असंतुलन हो सकता है। खनिज पूरक के साथ संतुलित करें।');
   }
   return {
     'role_en': pair.$1,

@@ -71,6 +71,35 @@ def ration_advice(nutrition: dict) -> dict:
         tips_en.append("This name was not in the Indian tables, so the figure is a guess from the name.")
         tips_hi.append("यह नाम भारतीय तालिका में नहीं था, इसलिए यह आँकड़ा नाम से लगाया गया अनुमान है।")
 
+    # --- Mineral deficiency advisory ---
+    if feed_class in {"crop_residue", "hay"}:
+        tips_en.append(
+            "This roughage is low in Calcium and Phosphorus. "
+            "Add 50–100 g Area-Specific Mineral Mixture (ASMM) daily per animal."
+        )
+        tips_hi.append(
+            "इस चारे में कैल्शियम और फ़ॉस्फ़ोरस कम है। "
+            "प्रति पशु प्रतिदिन 50–100 ग्राम क्षेत्र-विशिष्ट खनिज मिश्रण (ASMM) दें।"
+        )
+    elif feed_class == "grains":
+        tips_en.append(
+            "Grain-heavy diets lack minerals. "
+            "Ensure a mineral mixture is part of the daily ration."
+        )
+        tips_hi.append(
+            "अनाज-प्रधान आहार में खनिज कम होते हैं। "
+            "दैनिक राशन में खनिज मिश्रण अवश्य शामिल करें।"
+        )
+    elif feed_class == "oilcakes" and cp is not None and cp > 30:
+        tips_en.append(
+            "High-protein cakes can have a Calcium–Phosphorus imbalance. "
+            "Balance with a mineral supplement."
+        )
+        tips_hi.append(
+            "अधिक प्रोटीन वाली खली में कैल्शियम-फ़ॉस्फ़ोरस असंतुलन हो सकता है। "
+            "खनिज पूरक के साथ संतुलित करें।"
+        )
+
     return {
         "role_en": role_en,
         "role_hi": role_hi,

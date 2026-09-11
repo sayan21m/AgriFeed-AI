@@ -3,131 +3,484 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#1f3d28" />
+  <meta name="theme-color" content="#0f2b1b" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="SmartFeed" />
-  <title>SmartFeed India</title>
+  <meta name="apple-mobile-web-app-title" content="AgriFeed-AI" />
+  <title>AgriFeed-AI · Digital Cattle Feed & Silage Quality Assessment</title>
   <link rel="manifest" href="/manifest.webmanifest" />
-  <link rel="apple-touch-icon" href="/static/icon-192.png" />
-  <link rel="icon" href="/static/icon-192.png" />
-  <link rel="stylesheet" href="/static/styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png?v=3.0" />
+  <link rel="apple-touch-icon" href="/static/icon-192.png?v=3.0" />
+  <link rel="stylesheet" href="/static/styles.css?v=3.2" />
+  <script src="/static/html5-qrcode.min.js?v=3.0"></script>
 </head>
 <body>
-  <div class="app">
-    <header class="appbar">
-      <div>
-        <p class="kicker" data-i18n="kicker">SIH26111 · DAHD</p>
-        <h1 data-i18n="title">SmartFeed</h1>
+
+  <!-- Top SIH Bar -->
+  <div class="top-bar">
+    <div class="top-container">
+      <div class="top-tag-wrap">
+        <span class="sih-pill">SIH26111</span>
+        <span class="sih-desc">Smart India Hackathon 2026 &middot; Ministry of Fisheries, Animal Husbandry & Dairying</span>
       </div>
-      <div class="lang" role="group" aria-label="Language">
-        <button type="button" id="lang-en" class="on">EN</button>
-        <button type="button" id="lang-hi">हिं</button>
+      <div class="lang-toggle" role="group" aria-label="Language selection">
+        <button type="button" class="lang-btn active" id="lang-en">English</button>
+        <button type="button" class="lang-btn" id="lang-hi">हिंदी</button>
       </div>
-    </header>
-
-    <p id="install-bar" class="install hidden">
-      <span data-i18n="install">Install this app on the phone for more storage.</span>
-      <button type="button" id="install-btn" data-i18n="install_btn">Add</button>
-    </p>
-
-    <main>
-      <section id="screen-test" class="screen">
-        <div class="kitbar">
-          <div>
-            <p class="kit-label" data-i18n="kit">ESP32 kit</p>
-            <p id="kit-status" class="note" data-i18n="kit_idle">No reading yet. Power the board or simulate.</p>
-          </div>
-          <button type="button" id="kit-pull" class="ghost" data-i18n="kit_pull">Use kit</button>
-        </div>
-
-        <form id="kit">
-          <label>
-            <span data-i18n="ingredient">What is this feed?</span>
-            <input id="ingredient" name="ingredient" list="ingredient-list" required autocomplete="off"
-              placeholder="mustard cake / sarson khali / maize silage" />
-            <datalist id="ingredient-list"></datalist>
-          </label>
-
-          <fieldset>
-            <legend data-i18n="form">Form</legend>
-            <label class="chip"><input type="radio" name="form" value="ingredient" checked /> <span data-i18n="form_ing">Ingredient</span></label>
-            <label class="chip"><input type="radio" name="form" value="silage" /> <span data-i18n="form_sil">Silage</span></label>
-            <label class="chip"><input type="radio" name="form" value="compounded" /> <span data-i18n="form_cmp">Compounded</span></label>
-          </fieldset>
-
-          <div class="grid2">
-            <label>
-              <span data-i18n="moisture">Moisture %</span>
-              <input id="moisture" name="moisture_pct" type="number" min="0" max="90" step="0.1" inputmode="decimal" />
-            </label>
-            <label id="ph-wrap">
-              <span data-i18n="ph">Silage pH</span>
-              <input id="ph" name="ph" type="number" min="3" max="8" step="0.01" inputmode="decimal" />
-            </label>
-          </div>
-
-          <div class="grid2">
-            <label>
-              <span data-i18n="urea">4-DMAB yellow %</span>
-              <input id="urea" name="urea_yellow_area_pct" type="number" min="0" max="100" step="0.1" inputmode="decimal" />
-            </label>
-            <label class="check">
-              <input id="mould" name="visible_mould" type="checkbox" />
-              <span data-i18n="mould">Visible mould</span>
-            </label>
-          </div>
-
-          <details class="more">
-            <summary data-i18n="sand">Sand / silica</summary>
-            <div class="grid2">
-              <label>
-                <span data-i18n="grit">Settled grit (ml)</span>
-                <input id="grit" name="grit_settled_ml" type="number" min="0" max="1000" step="0.1" inputmode="decimal" />
-              </label>
-              <label>
-                <span data-i18n="sample_g">Sample weight (g)</span>
-                <input id="sample_g" name="sample_g" type="number" min="1" max="10000" step="1" inputmode="numeric" />
-              </label>
-            </div>
-            <label>
-              <span data-i18n="aia">AIA % (if lab tested)</span>
-              <input id="aia" name="aia_pct" type="number" min="0" max="100" step="0.01" inputmode="decimal" />
-            </label>
-          </details>
-
-          <label class="photo-btn">
-            <span data-i18n="photo">Phone photo (mould)</span>
-            <input id="photo" name="photo" type="file" accept="image/*" capture="environment" />
-          </label>
-          <img id="photo-preview" class="preview hidden" alt="" />
-
-          <button type="submit" class="go" data-i18n="test">Test now</button>
-        </form>
-      </section>
-
-      <section id="screen-result" class="screen hidden">
-        <div id="result-empty" class="empty">
-          <p data-i18n="result_empty">Run a test. The verdict will show here.</p>
-        </div>
-        <div id="result" class="hidden" aria-live="polite"></div>
-      </section>
-
-      <section id="screen-models" class="screen hidden">
-        <p class="lead" data-i18n="models_lead">Models live on this device pack, not inside a web page. Replace a file in models/ and tap Update.</p>
-        <p id="models-meta" class="note"></p>
-        <ul id="models-list" class="model-list"></ul>
-        <button type="button" id="models-update" class="go" data-i18n="models_update">Update & reload</button>
-        <p id="models-status" class="note"></p>
-      </section>
-    </main>
-
-    <nav class="tabbar" aria-label="App">
-      <button type="button" class="tab on" data-screen="test" data-i18n="tab_test">Test</button>
-      <button type="button" class="tab" data-screen="result" data-i18n="tab_result">Verdict</button>
-      <button type="button" class="tab" data-screen="models" data-i18n="tab_models">Models</button>
-    </nav>
+    </div>
   </div>
-  <script src="/static/app.js"></script>
+
+  <!-- Main Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#hero" class="brand-group">
+        <div class="brand-logo-wrap">
+          <img src="/static/images/logo_clean.png" alt="AgriFeed-AI Logo" />
+        </div>
+        <div class="brand-text">
+          <h1>AgriFeed-AI</h1>
+          <p>Ministry of Fisheries, Animal Husbandry & Dairying &middot; DAHD</p>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="#test-portal" class="nav-link">Assess Feed</a>
+        <a href="#knowledge-gallery" class="nav-link">Quality Standards</a>
+        <a href="#hardware-kit" class="nav-link">Village Kit</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h2 class="hero-title" data-i18n="hero_title">Rapid Cattle Feed & Silage Quality Assessment</h2>
+      <p class="hero-desc" data-i18n="hero_desc">
+        Portable digital testing powered by Indian dairy tables (NDDB & BIS), colorimetric adulteration screening, Flieg fermentation scoring, and feed bag QR authenticity.
+      </p>
+      <div class="hero-pills">
+        <span class="hero-pill">✓ 77+ Calibrated Indian Feeds</span>
+        <span class="hero-pill">✓ Urea & Mould Adulteration Check</span>
+        <span class="hero-pill">✓ Area-Specific Mineral Advice (ASMM)</span>
+        <span class="hero-pill">✓ Camera QR Bag Verification</span>
+        <span class="hero-pill">✓ Bilingual Audio Output</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#test-portal" class="btn-primary" id="btn-hero-start">Start Feed Assessment</a>
+        <button type="button" class="btn-secondary" id="btn-hero-qr">Verify Bag QR Code</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Assessment Portal -->
+  <main class="main-layout" id="test-portal">
+    <div class="portal-card">
+
+      <!-- Navigation Tabs -->
+      <nav class="portal-tabs tabbar" aria-label="Portal tabs">
+        <button type="button" class="portal-tab-btn tab on" data-screen="test">
+          <span data-i18n="tab_test">Assess Feed</span>
+        </button>
+        <button type="button" class="portal-tab-btn tab" data-screen="qr">
+          <span data-i18n="tab_qr">Verify Bag</span>
+        </button>
+        <button type="button" class="portal-tab-btn tab" data-screen="result">
+          <span data-i18n="tab_result">Verdict & Advice</span>
+        </button>
+        <button type="button" class="portal-tab-btn tab" data-screen="models">
+          <span data-i18n="tab_models">Sensor Kit & Models</span>
+        </button>
+      </nav>
+
+      <!-- SCREEN 1: Assess Feed (Spacious, Centered Form) -->
+      <section id="screen-test" class="screen-panel screen">
+        <div class="form-centered-box">
+          <h3 class="form-section-title" data-i18n="ingredient">What is this feed?</h3>
+
+          <!-- Visual Category Selector -->
+          <div class="category-chips">
+            <label class="cat-chip selected" id="chip-raw">
+              <input type="radio" name="form" value="ingredient" checked />
+              <img src="/static/images/forage.jpg" alt="Raw Fodder" />
+              <span data-i18n="form_ing">Raw Fodder</span>
+            </label>
+            <label class="cat-chip" id="chip-silage">
+              <input type="radio" name="form" value="silage" />
+              <img src="/static/images/silage.jpg" alt="Silage" />
+              <span data-i18n="form_sil">Silage</span>
+            </label>
+            <label class="cat-chip" id="chip-compound">
+              <input type="radio" name="form" value="compounded" />
+              <img src="/static/images/grain.jpg" alt="Compounded" />
+              <span data-i18n="form_cmp">Compounded</span>
+            </label>
+          </div>
+
+          <form id="kit" autocomplete="off">
+            <!-- Feed Name / Autocomplete -->
+            <div class="form-group">
+              <label class="form-label" for="ingredient">
+                <span data-i18n="ingredient_name">Select or type feed name</span>
+                <span class="sub">(e.g. mustard cake, wheat straw, maize silage)</span>
+              </label>
+              <input id="ingredient" name="ingredient" class="form-input" list="ingredient-list" placeholder="Type feed name..." required value="wheat straw" />
+              <datalist id="ingredient-list"></datalist>
+            </div>
+
+            <!-- Primary Measurements -->
+            <div class="grid2 form-group">
+              <div>
+                <label class="form-label" for="moisture">
+                  <span data-i18n="moisture">Moisture %</span>
+                  <span class="sub">(probe or oven)</span>
+                </label>
+                <input id="moisture" name="moisture_pct" class="form-input" type="number" min="0" max="100" step="0.1" inputmode="decimal" placeholder="e.g. 9.0" value="9" />
+              </div>
+              <div id="ph-wrapper">
+                <label class="form-label" for="ph">
+                  <span data-i18n="ph">Silage pH</span>
+                  <span class="sub">(for pit silage)</span>
+                </label>
+                <input id="ph" name="ph" class="form-input" type="number" min="0" max="14" step="0.05" inputmode="decimal" placeholder="e.g. 3.9" />
+              </div>
+            </div>
+
+            <!-- Adulteration & Safety Tests -->
+            <div class="grid2 form-group">
+              <div>
+                <label class="form-label" for="urea">
+                  <span data-i18n="urea">4-DMAB Yellow %</span>
+                  <span class="sub">(urea strip test)</span>
+                </label>
+                <input id="urea" name="urea_yellow_area_pct" class="form-input" type="number" min="0" max="100" step="0.1" inputmode="decimal" placeholder="0 - 100%" />
+              </div>
+              <div>
+                <label class="check-toggle">
+                  <input id="mould" name="visible_mould" type="checkbox" />
+                  <span data-i18n="mould">Visible Mould Detected</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Sand / Silica Details (Accordion) -->
+            <details class="more-details">
+              <summary>
+                <span data-i18n="sand">Sand & Silica Adulteration (Jar Test / Lab AIA)</span>
+                <span style="font-size:0.8rem;color:var(--muted);">▼</span>
+              </summary>
+              <div class="more-details-body">
+                <div class="grid2 form-group">
+                  <div>
+                    <label class="form-label" for="grit">Settled Grit (ml)</label>
+                    <input id="grit" name="grit_settled_ml" class="form-input" type="number" min="0" max="1000" step="0.1" placeholder="ml settled in jar" />
+                  </div>
+                  <div>
+                    <label class="form-label" for="sample_g">Sample Weight (g)</label>
+                    <input id="sample_g" name="sample_g" class="form-input" type="number" min="1" max="10000" step="1" placeholder="e.g. 100" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="aia">AIA % (Acid-Insoluble Ash, if lab tested)</label>
+                  <input id="aia" name="aia_pct" class="form-input" type="number" min="0" max="100" step="0.01" placeholder="e.g. 2.1" />
+                </div>
+              </div>
+            </details>
+
+            <!-- Photo Upload Box -->
+            <label class="photo-upload-box" for="photo">
+              <span class="photo-upload-icon">📷</span>
+              <strong data-i18n="photo">Upload Feed Photo for Mould Verification</strong>
+              <p style="font-size:0.82rem;color:var(--muted);margin-top:2px;">Camera capture or photo gallery (analyzed by computer vision)</p>
+              <input id="photo" name="photo" type="file" accept="image/*" capture="environment" style="display:none;" />
+              <div id="photo-preview-container" class="hidden">
+                <img id="photo-preview" class="photo-preview-img" alt="Feed Sample Preview" />
+              </div>
+            </label>
+
+            <!-- Feed Bag QR Verification Section -->
+            <details class="more-details" id="qr-test-details" open>
+              <summary>
+                <span data-i18n="qr_heading">Feed Bag QR Authenticity Verification</span>
+                <span style="font-size:0.8rem;color:var(--muted);">▼</span>
+              </summary>
+              <div class="more-details-body">
+                <p style="font-size:0.86rem;color:var(--muted);margin-bottom:10px;">
+                  Verify manufacturer license, declared protein, and expiry dates printed on the feed bag QR code.
+                </p>
+                <div class="qr-btn-row">
+                  <label class="btn-outline" style="margin:0;cursor:pointer;">
+                    Upload QR Image
+                    <input id="input-test-qr-file" type="file" accept="image/*" style="display:none;" />
+                  </label>
+                  <button type="button" class="btn-outline btn-sm" id="btn-scan-test-qr">Use Camera</button>
+                  <button type="button" class="btn-outline btn-sm" id="btn-sample-test-qr">Fill Sample Bag</button>
+                  <button type="button" class="btn-outline btn-sm hidden" id="btn-clear-test-qr" style="color:#bd2130;">✕ Clear</button>
+                </div>
+                <div id="test-qr-video" class="qr-scanner-box hidden">
+                  <div id="test-qr-reader"></div>
+                  <button type="button" class="btn-outline btn-sm" id="btn-stop-test-qr" style="margin-top:8px;background:#fff;">Stop Camera</button>
+                </div>
+                <div id="test-qr-info" class="qr-bag-card hidden"></div>
+                <input id="qr_payload" name="qr_payload" type="hidden" />
+              </div>
+            </details>
+
+            <!-- Main Submit Action -->
+            <button type="submit" class="submit-btn" id="btn-test-submit">Assess Feed Quality Now</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- SCREEN 2: Dedicated QR Scanner Screen -->
+      <section id="screen-qr" class="screen-panel screen hidden">
+        <div class="form-centered-box">
+          <h2 style="font-size:1.35rem;color:var(--forest-dark);margin-bottom:6px;" data-i18n="qr_tab_title">Feed Bag Authenticity Scanner</h2>
+          <p style="color:var(--muted);margin-bottom:20px;font-size:0.92rem;" data-i18n="qr_tab_desc">
+            Scan or upload the QR code printed on cattle feed bags to verify expiry dates, manufacturer license, and declared nutrients against Indian tables.
+          </p>
+
+          <div class="qr-btn-row">
+            <label class="btn-primary" style="margin:0;cursor:pointer;">
+              Upload QR Image File
+              <input id="input-tab-qr-file" type="file" accept="image/*" style="display:none;" />
+            </label>
+            <button type="button" class="btn-secondary" id="btn-start-tab-scanner" style="color:#fff;">Open Camera Scanner</button>
+            <button type="button" class="btn-outline hidden" id="btn-stop-tab-scanner">Stop Camera</button>
+          </div>
+
+          <div id="tab-qr-scanner-box" class="qr-scanner-box hidden">
+            <div id="tab-qr-reader"></div>
+          </div>
+
+          <div style="margin:24px 0 16px;background:#f6faf7;padding:18px;border-radius:var(--radius-sm);border:1.5px solid #dbe7df;">
+            <p style="font-size:0.8rem;color:var(--muted);font-weight:800;letter-spacing:0.5px;margin-bottom:12px;">
+              ONE-CLICK DEMO PRESETS:
+            </p>
+            <div class="qr-btn-row">
+              <button type="button" class="btn-outline btn-sm" id="btn-preset-valid">✓ Valid Amul Feed (CP 36%)</button>
+              <button type="button" class="btn-outline btn-sm" id="btn-preset-expired">⚠️ Expired Bag (2020)</button>
+              <button type="button" class="btn-outline btn-sm" id="btn-preset-mismatch">❌ Mismatched CP (12%)</button>
+            </div>
+          </div>
+
+          <div id="tab-qr-result" class="hidden"></div>
+        </div>
+      </section>
+
+      <!-- SCREEN 3: Dedicated Full-Width Verdict Screen -->
+      <section id="screen-result" class="screen-panel screen hidden">
+        <div class="verdict-full-box">
+          <div id="result-empty" class="verdict-empty-state">
+            <img src="/static/images/logo_clean.png" alt="Ready" />
+            <h4 style="color:var(--forest-dark);font-size:1.2rem;margin-bottom:6px;">Ready for Feed Assessment</h4>
+            <p data-i18n="result_empty">Configure feed readings on the Assess Feed tab and tap Assess Feed Quality. Detailed safety verdicts and ration advice will appear right here.</p>
+            <button type="button" class="btn-primary" style="margin-top:16px;" onclick="showScreen('test')">Go to Assess Feed Form</button>
+          </div>
+          <div id="result" class="hidden" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- SCREEN 4: Sensor Kit & Offline Models -->
+      <section id="screen-models" class="screen-panel screen hidden">
+        <div class="form-centered-box">
+          <h3 style="font-size:1.3rem;color:var(--forest-dark);margin-bottom:8px;">Village Kit Hardware & Model Pack</h3>
+          <div class="kit-status-strip">
+            <span class="kit-status-text" id="kit-status">No reading yet. Power the board or simulate.</span>
+            <button type="button" class="btn-outline btn-sm" id="kit-pull">Fetch Kit Data</button>
+          </div>
+          <p style="font-size:0.92rem;color:var(--muted);margin-bottom:14px;" data-i18n="models_lead">
+            Weights live on this device pack, not inside a web page. Replace a file in models/ and tap Update.
+          </p>
+          <p id="models-meta" style="font-size:0.86rem;color:var(--forest);font-weight:700;margin-bottom:12px;"></p>
+          <ul id="models-list" style="list-style:none;margin-bottom:16px;"></ul>
+          <button type="button" id="models-update" class="btn-outline" data-i18n="models_update">Update & Reload Pack</button>
+          <p id="models-status" style="font-size:0.85rem;color:var(--muted);margin-top:8px;"></p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Redesigned Feed & Silage Knowledge Showcase -->
+  <section class="gallery-section" id="knowledge-gallery">
+    <div class="section-header">
+      <h2>Essential Dairy Feed Classes & Quality Standards</h2>
+      <p>Scientific guidelines based on NDDB, BIS IS 2052, and ICAR Indian animal nutrition standards</p>
+    </div>
+    <div class="gallery-grid">
+
+      <!-- Card 1: Milking Nutrition -->
+      <div class="feed-card">
+        <div class="feed-card-img-wrap">
+          <img src="/static/images/hero_cattle.jpg" alt="Dairy Cattle Nutrition" loading="lazy" />
+        </div>
+        <div class="feed-card-body">
+          <div>
+            <div class="feed-card-tag">Ration Balancing &middot; NDDB</div>
+            <h3>Dairy Cow Protein Balance</h3>
+            <p>A lactating crossbred cow's total mixed ration requires 12–16% crude protein on dry matter. Known feeds lookup calibrated Indian tables rather than guessing.</p>
+          </div>
+          <div class="feed-card-footer">
+            <span>Target: 12–16% CP on DM</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Silage Pit Quality -->
+      <div class="feed-card">
+        <div class="feed-card-img-wrap">
+          <img src="/static/images/silage.jpg" alt="Silage Fermentation" loading="lazy" />
+        </div>
+        <div class="feed-card-body">
+          <div>
+            <div class="feed-card-tag">Silage Fermentation &middot; Flieg Score</div>
+            <h3>Pit Silage Acidification</h3>
+            <p>Good silage fermentation requires pH below 4.2. High pH with low dry matter triggers clostridial effluent spoilage and is flagged for dilution or rejection.</p>
+          </div>
+          <div class="feed-card-footer">
+            <span>Flieg Formula &middot; Max pH 4.2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Roughage & Straw -->
+      <div class="feed-card">
+        <div class="feed-card-img-wrap">
+          <img src="/static/images/hay.jpg" alt="Straw and Roughage" loading="lazy" />
+        </div>
+        <div class="feed-card-body">
+          <div>
+            <div class="feed-card-tag">Roughage &middot; Mineral Advisory</div>
+            <h3>Straws & Mineral Supplementation</h3>
+            <p>Wheat & paddy straws provide bulk fibre but lack Calcium and Phosphorus. AgriFeed-AI automatically advises 50–100g Area-Specific Mineral Mixture (ASMM) daily.</p>
+          </div>
+          <div class="feed-card-footer">
+            <span>50–100g ASMM Supplement</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Compounded Feed & Urea Safety -->
+      <div class="feed-card">
+        <div class="feed-card-img-wrap">
+          <img src="/static/images/grain.jpg" alt="Compounded Feed Safety" loading="lazy" />
+        </div>
+        <div class="feed-card-body">
+          <div>
+            <div class="feed-card-tag">Adulteration Safety &middot; BIS IS 2052</div>
+            <h3>Urea & Moisture Safety Limits</h3>
+            <p>Commercial compounded feed must never exceed 1% urea or 11% moisture. Colorimetric 4-DMAB and settling jar tests screen urea and silica contamination.</p>
+          </div>
+          <div class="feed-card-footer">
+            <span>BIS Max 1% Urea &middot; Max 11% Moisture</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Hardware Kit Section -->
+  <section class="gallery-section" id="hardware-kit">
+    <div class="section-header">
+      <h2>Village Kit Architecture</h2>
+      <p>Low-cost field hardware paired with scientifically honest local smartphone scoring</p>
+    </div>
+    <div style="background:#ffffff;border-radius:var(--radius);border:1.5px solid var(--line);padding:28px;box-shadow:var(--shadow-sm);">
+      <div class="grid2">
+        <div>
+          <h4 style="color:var(--forest-dark);font-size:1.15rem;margin-bottom:10px;">Portable Hardware (ESP32)</h4>
+          <p style="font-size:0.92rem;color:var(--muted);line-height:1.55;margin-bottom:14px;">
+            The physical village kit comprises a capacitive moisture probe, an industrial pH electrode, an 18-channel AS7265x optical spectral sensor, and a 4-DMAB colorimetric reaction chamber.
+          </p>
+          <ul style="padding-left:20px;font-size:0.9rem;color:#333;line-height:1.7;">
+            <li><strong>Moisture Probe:</strong> Converts Dry Matter values to as-fed intake.</li>
+            <li><strong>pH Electrode:</strong> Evaluates silage pit acidification (&lt; 4.2 lactic target).</li>
+            <li><strong>4-DMAB Reagent:</strong> Turns bright yellow if urea is adulterated above BIS 1%.</li>
+            <li><strong>Local Hotspot:</strong> Connects to mobile phone via Wi-Fi <em>SmartFeed</em>.</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color:var(--forest-dark);font-size:1.15rem;margin-bottom:10px;">Scientifically Honest Pipeline</h4>
+          <p style="font-size:0.92rem;color:var(--muted);line-height:1.55;margin-bottom:14px;">
+            Unlike apps that hallucinate protein figures from uncalibrated camera photos, AgriFeed-AI adheres strictly to ICAR and NDDB nutritional bands while using sensors for real physical safety gates:
+          </p>
+          <div style="background:var(--forest-soft);padding:14px 16px;border-radius:8px;font-size:0.88rem;color:var(--forest);border:1px solid #cce3d4;">
+            <strong>Worst Trigger Wins:</strong> Mould, sand, or urea will never be softened by high protein. The pipeline takes the most conservative safety action (Feed, Dilute, or Reject).
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="/static/images/logo_clean.png" alt="AgriFeed Logo" />
+        </div>
+        <div>
+          <h3 style="color:#ffffff;font-size:1.15rem;margin:0;">AgriFeed-AI</h3>
+          <p style="margin:2px 0 0;font-size:0.82rem;color:#8ba994;">Smart India Hackathon &middot; SIH26111 Prototype</p>
+        </div>
+      </div>
+      <div>
+        <p style="margin:0;font-size:0.88rem;">Ministry of Fisheries, Animal Husbandry & Dairying &middot; Government of India</p>
+        <p style="margin:2px 0 0;font-size:0.8rem;color:#8ba994;">Data sources: NDDB (2012), BIS IS 2052, ICAR Animal Nutrition Tables</p>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <span>&copy; 2026 AgriFeed-AI &middot; Fully Offline-Capable Web & Mobile PWA</span>
+      <a href="#hero" style="color:var(--gold);text-decoration:none;font-weight:700;">↑ Back to Top</a>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Navigation Bar (Visible only on phone screens <= 768px) -->
+  <nav class="mobile-bottom-nav tabbar" aria-label="Mobile Navigation">
+    <button type="button" class="mobile-nav-btn active" data-screen="test">
+      <svg class="mobile-nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M10 2v7.31L4.89 20a1 1 0 0 0 .82 1.45h12.58a1 1 0 0 0 .82-1.45L14 9.31V2"/>
+        <line x1="8.5" y1="2" x2="15.5" y2="2"/>
+        <line x1="14" y1="9.3" x2="10" y2="9.3"/>
+      </svg>
+      <span class="mobile-nav-label" data-i18n="tab_test">Assess</span>
+    </button>
+    <button type="button" class="mobile-nav-btn" data-screen="qr">
+      <svg class="mobile-nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
+        <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+        <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
+        <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+        <rect x="7" y="7" width="10" height="10" rx="1"/>
+      </svg>
+      <span class="mobile-nav-label" data-i18n="tab_qr">Verify QR</span>
+    </button>
+    <button type="button" class="mobile-nav-btn" data-screen="result">
+      <svg class="mobile-nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <path d="m9 12 2 2 4-4"/>
+      </svg>
+      <span class="mobile-nav-label" data-i18n="tab_result">Verdict</span>
+    </button>
+    <button type="button" class="mobile-nav-btn" data-screen="models">
+      <svg class="mobile-nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="4" y="4" width="16" height="16" rx="2"/>
+        <rect x="9" y="9" width="6" height="6"/>
+        <line x1="9" y1="1" x2="9" y2="4"/>
+        <line x1="15" y1="1" x2="15" y2="4"/>
+        <line x1="9" y1="20" x2="9" y2="23"/>
+        <line x1="15" y1="20" x2="15" y2="23"/>
+        <line x1="20" y1="9" x2="23" y2="9"/>
+        <line x1="20" y1="14" x2="23" y2="14"/>
+        <line x1="1" y1="9" x2="4" y2="9"/>
+        <line x1="1" y1="14" x2="4" y2="14"/>
+      </svg>
+      <span class="mobile-nav-label" data-i18n="tab_models">Kit</span>
+    </button>
+  </nav>
+
+  <script src="/static/app.js?v=3.2"></script>
 </body>
 </html>

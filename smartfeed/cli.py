@@ -22,6 +22,7 @@ def main() -> None:
     p.add_argument("--aia", type=float, help="acid-insoluble ash %% from a lab or mini-kit")
     p.add_argument("--grit-ml", type=float, help="settled grit in the jar test")
     p.add_argument("--sample-g", type=float, help="sample weight for the jar test")
+    p.add_argument("--qr", help="base64 QR payload from feed bag")
     p.add_argument("--lang", choices=["en", "hi"], default="en")
     p.add_argument("--json", action="store_true", help="print the full result instead of a farmer card")
     args = p.parse_args()
@@ -37,6 +38,7 @@ def main() -> None:
             aia_pct=args.aia,
             grit_settled_ml=args.grit_ml,
             sample_g=args.sample_g,
+            qr_payload=args.qr,
         )
     except SensorRangeError as exc:
         sys.exit(f"Bad reading: {exc}")

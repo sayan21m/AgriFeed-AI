@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smartfeed_app/brand.dart';
 import 'package:smartfeed_app/kit.dart';
 import 'package:smartfeed_app/l10n.dart';
+import 'package:smartfeed_app/qr_screen.dart';
 import 'package:smartfeed_app/wifi_link.dart';
 import 'package:smartfeed_app/offline/pipeline.dart';
 import 'package:smartfeed_app/offline/sensors.dart';
@@ -274,6 +275,7 @@ class _HomePageState extends State<HomePage> {
                 _TestTab(state: this),
                 _ResultTab(state: this),
                 _KitTab(state: this),
+                QrTab(t: t),
               ],
             ),
           ),
@@ -286,6 +288,7 @@ class _HomePageState extends State<HomePage> {
           NavigationDestination(icon: const Icon(Icons.grass_outlined), selectedIcon: const Icon(Icons.grass), label: t.tabTest),
           NavigationDestination(icon: const Icon(Icons.pets_outlined), selectedIcon: const Icon(Icons.pets), label: t.tabResult),
           NavigationDestination(icon: const Icon(Icons.sensors_outlined), selectedIcon: const Icon(Icons.sensors), label: t.tabKit),
+          NavigationDestination(icon: const Icon(Icons.qr_code_scanner_outlined), selectedIcon: const Icon(Icons.qr_code_scanner), label: t.tabQr),
         ],
       ),
     );

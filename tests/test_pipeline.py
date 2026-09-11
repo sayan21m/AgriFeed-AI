@@ -122,3 +122,46 @@ def test_spoken_advice_is_natural_language():
     assert "18" in out["spoken"]["en"]
     assert "खिलाएँ" in out["spoken"]["hi"]
     assert out["modules"]["nir"]["used"] is False
+
+
+def test_mineral_deficiency_advisory():
+    out = assess("wheat straw", moisture_pct=9)
+    assert any("ASMM" in tip for tip in out["ration"]["tips_en"])
+    assert any("खनिज मिश्रण" in tip for tip in out["ration"]["tips_hi"])
+
+    out_cake = assess("groundnut cake", moisture_pct=8)
+    assert any("mineral" in tip.lower() for tip in out_cake["ration"]["tips_en"])
+
+
+def test_qr_payload_verification():
+    from smartfeed.qr import generate_qr_payload
+
+    valid_payload = generate_qr_payload({
+        "manufacturer": "Amul Feed Co",
+        "batch_no": "B2026-09",
+        "pack_date": "2026-08-01",
+        "expiry_date": "2027-08-01",
+        "declared_cp_pct_dm": 36.0,
+        "declared_moisture_pct": 10.0,
+    })
+    out = assess("mustard cake", moisture_pct=10.0, qr_payload=valid_payload)
+    assert out["modules"]["qr"]["verified"] is True
+    assert out["decision"]["action"] == "feed"
+
+    expired_payload = generate_qr_payload({
+        "manufacturer": "Amul Feed Co",
+        "expiry_date": "2020-01-01",
+    })
+    out_exp = assess("mustard cake", moisture_pct=10.0, qr_payload=expired_payload)
+    assert out_exp["modules"]["qr"]["expired"] is True
+    assert out_exp["decision"]["action"] == "dilute"
+    assert any("expiry date" in r for r in out_exp["decision"]["reasons"])
+
+    mismatch_payload = generate_qr_payload({
+        "manufacturer": "Amul Feed Co",
+        "declared_cp_pct_dm": 12.0,
+    })
+    out_mis = assess("mustard cake", moisture_pct=10.0, qr_payload=mismatch_payload)
+    assert out_mis["modules"]["qr"]["cp_mismatch"] is True
+    assert out_mis["decision"]["action"] == "dilute"
+

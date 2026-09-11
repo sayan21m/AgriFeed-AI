@@ -60,6 +60,18 @@ REASON = {
         "en": "No reject or dilute trigger from the sensors and tables.",
         "hi": "सेंसर और तालिका से कोई अस्वीकार संकेत नहीं।",
     },
+    "bag past expiry date (QR)": {
+        "en": "Bag is past its expiry date (from QR code).",
+        "hi": "बोरी की समाप्ति तिथि बीत चुकी है (QR कोड से)।",
+    },
+    "declared CP does not match tables (QR)": {
+        "en": "Declared crude protein on the bag does not match Indian tables (QR check).",
+        "hi": "बोरी पर लिखा प्रोटीन भारतीय तालिका से मेल नहीं खाता (QR जाँच)।",
+    },
+    "declared moisture does not match measurement (QR)": {
+        "en": "Declared moisture on the bag does not match the sensor reading (QR check).",
+        "hi": "बोरी पर लिखी नमी सेंसर रीडिंग से मेल नहीं खाती (QR जाँच)।",
+    },
 }
 
 # Reasons that carry a measured number, so they are matched on their opening words.
