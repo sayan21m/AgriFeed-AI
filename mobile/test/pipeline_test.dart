@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smartfeed_app/offline/pipeline.dart';
+import 'package:smartfeed_app/offline/qr.dart';
 import 'package:smartfeed_app/offline/screens.dart';
 import 'package:smartfeed_app/offline/sensors.dart';
 import 'package:smartfeed_app/offline/tables.dart';
@@ -105,5 +106,27 @@ void main() {
     final out = await assess(ingredient: 'mystery oilcake xyz');
     expect(out['modules']['nutrition']['method'], 'keyword_class_fallback');
     expect(out['modules']['nutrition']['feed_class'], 'oilcakes');
+  });
+
+  test('QR valid bag stays feed', () async {
+    final payload = encodeQrPayload(demoBag(kind: 'valid'));
+    final out = await assess(ingredient: 'mustard cake', moisturePct: 10, qrPayload: payload);
+    expect(out['modules']['qr']['verified'], isTrue);
+    expect(out['decision']['action'], 'feed');
+  });
+
+  test('QR expired bag is dilute', () async {
+    final payload = encodeQrPayload(demoBag(kind: 'expired'));
+    final out = await assess(ingredient: 'mustard cake', moisturePct: 10, qrPayload: payload);
+    expect(out['modules']['qr']['expired'], isTrue);
+    expect(out['decision']['action'], 'dilute');
+    expect((out['decision']['reasons'] as List).join(' '), contains('expiry'));
+  });
+
+  test('QR CP mismatch is dilute', () async {
+    final payload = encodeQrPayload(demoBag(kind: 'mismatch'));
+    final out = await assess(ingredient: 'mustard cake', moisturePct: 10, qrPayload: payload);
+    expect(out['modules']['qr']['cp_mismatch'], isTrue);
+    expect(out['decision']['action'], 'dilute');
   });
 }

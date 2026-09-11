@@ -15,7 +15,7 @@ flutter pub get
 flutter run
 ```
 
-English / हिंदी, camera photo, spoken verdict. Type moisture / pH, or switch the board on and tap **Connect** — AgriFeed-AI joins Wi-Fi **SmartFeed** (that is the board’s hotspot name). Unknown names use a keyword class (not ExtraTrees). Photo mould is HSV (not the synthetic CNN). AS7265x is refused for CP.
+English / हिंदी, camera photo, bag QR authenticity, spoken verdict. Type moisture / pH, or switch the board on and tap **Connect** — AgriFeed-AI joins Wi-Fi **SmartFeed** (that is the board’s hotspot name). Unknown names use a keyword class (not ExtraTrees). Photo mould is HSV (not the synthetic CNN). AS7265x is refused for CP.
 
 Rebuild the bundled tables after CSV changes:
 
@@ -96,6 +96,7 @@ possible but unusual come back in `sensor_warnings`.
 - Photo mould **on the phone** is HSV (can false-flag green fodder). The CNN lives
   in the notebooks / desk API and was trained on **synthetic** patches, not Indian bags. Not aflatoxin ppb.
 - Unknown names on the phone use a **keyword class**, not ExtraTrees.
+- Bag QR is **unsigned prototype** authenticity (expiry + declared CP/moisture). It is not a mill cryptographic seal.
 - `ration` gives a role for one ingredient. It is not a balanced ration.
 
 ## Tests

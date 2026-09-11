@@ -66,6 +66,7 @@ ESP32 hotspot SSID SmartFeed  (moisture · pH · 18× AS7265x log)
 | 4-DMAB yellow area | Ridge screen on Anitha 2022 (1–10 g/kg) | Kjeldahl urea |
 | Phone photo / mould tick | HSV on AgriFeed-AI; CNN desk-only | AFB1 µg/kg |
 | Settling jar / AIA % | Sand suspicion or BIS fail | NIR sand |
+| Bag QR | Expiry + declared CP/moisture vs tables and probe | Cryptographic mill seal; this bag's lab CP |
 | AS7265x 18 bands | Logged, then **refused** for CP | Indian oilcake protein |
 | 256-band forage NIR | Demo model on Brazilian tropical forage only | Indian bags |
 
@@ -119,10 +120,10 @@ Without a board, `python3 firmware/simulate_kit.py --moisture 10` posts the same
 ### 5.3 Farmer flow
 
 1. Open **AgriFeed-AI**. Tables are already on the phone. Optional: switch the board on and tap **Connect** (the app joins Wi-Fi `SmartFeed`).
-2. Name the feed (`sarson khali`, mustard cake, maize silage, …).
-3. **Connect** fills moisture / pH, or type them.
+2. Name the feed (`sarson khali`, mustard cake, maize silage, …), or scan the bag QR on **Verify Bag**.
+3. **Connect** fills moisture / pH, or type them. A scanned QR can prefill the name and declared moisture.
 4. Take a photo on the phone if mould is possible.
-5. **Test now** → stamp **Feed / Dilute / Reject**. **Hear advice** uses `en-IN` / `hi-IN`.
+5. **Test now** → stamp **Feed / Dilute / Reject**. Expired QR or a CP/moisture mismatch **dilutes**. **Hear advice** uses `en-IN` / `hi-IN`.
 
 ---
 
@@ -224,6 +225,16 @@ Shuffled K-fold CP MAE (1.20) is **optimistic** and is not the number we quote. 
 
 Not a formulated TMR. A lactating crossbred ration is typically **12–16% CP DM**. Wheat straw at ~3.3% CP is still “feed” as roughage, with an explicit warning that it cannot be the whole diet.
 
+### 7.9 Bag QR (SIH “QR-based authenticity”)
+
+A mill or union can print a URL-safe base64 JSON payload: manufacturer, batch, pack/expiry dates, declared CP % DM, declared moisture, optional BIS licence and ingredient name. AgriFeed-AI scans it on **Verify Bag**, prefills the test, and compares:
+
+- expiry vs today → **dilute** if past date;
+- declared CP vs NDDB/BIS table mean → **dilute** if more than 5 percentage points apart;
+- declared moisture vs the probe → **dilute** if more than 3 points apart.
+
+The prototype is **unsigned**. A production union would sign the payload. This is not a lab certificate for the bag in the farmer’s hand.
+
 ---
 
 ## 8. Decision examples
@@ -236,6 +247,8 @@ Not a formulated TMR. A lactating crossbred ration is typically **12–16% CP DM
 | Groundnut cake + mould | **Reject** | Visible mould + high-AF-risk ingredient |
 | Cattle feed, AIA 4% | **Reject** | Sand / silica over BIS |
 | Mustard cake, 4 ml grit / 100 g | **Dilute** | Jar test suspects sand; does not prove AIA |
+| Mustard cake + expired bag QR | **Dilute** | QR expiry date is past |
+| Mustard cake + QR declaring 12% CP | **Dilute** | Declared CP more than 5 points from the table |
 | Maize silage, pH 5.2, moisture 78% | **Dilute** | High pH on low DM + too wet |
 | 18 AS7265x counts on wheat bran | Feed (if nothing else) | Chip **not used** for CP |
 

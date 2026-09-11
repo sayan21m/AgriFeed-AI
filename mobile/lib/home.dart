@@ -10,6 +10,7 @@ import 'package:smartfeed_app/l10n.dart';
 import 'package:smartfeed_app/qr_screen.dart';
 import 'package:smartfeed_app/wifi_link.dart';
 import 'package:smartfeed_app/offline/pipeline.dart';
+import 'package:smartfeed_app/offline/qr.dart';
 import 'package:smartfeed_app/offline/sensors.dart';
 import 'package:smartfeed_app/offline/tables.dart';
 import 'package:smartfeed_app/type.dart';
@@ -49,6 +50,8 @@ class _HomePageState extends State<HomePage> {
   String? _error;
   Map<String, dynamic>? _result;
   String _packLine = '';
+  String? _qrPayload;
+  int _ingredientFieldEpoch = 0;
 
   @override
   void initState() {
@@ -216,6 +219,7 @@ class _HomePageState extends State<HomePage> {
         aiaPct: _num(_aia),
         nirAbsorbance: _spectrum,
         imagePath: _photo?.path,
+        qrPayload: _qrPayload,
       );
       setState(() {
         _result = out;
@@ -241,6 +245,39 @@ class _HomePageState extends State<HomePage> {
   void _setForm(String form) => setState(() => _form = form);
 
   void _setMould(bool value) => setState(() => _mould = value);
+
+  void _onQrScanned(String payload) {
+    setState(() => _qrPayload = payload);
+  }
+
+  void _clearQr() {
+    setState(() => _qrPayload = null);
+  }
+
+  void _useQrInTest() {
+    final bag = _qrPayload == null ? null : decodeQrPayload(_qrPayload!);
+    if (bag == null) return;
+    final name = '${bag['ingredient'] ?? ''}'.trim();
+    final type = '${bag['feed_type'] ?? ''}'.trim();
+    if (name.isNotEmpty) _ingredient = name;
+    if (type == 'silage' || type == 'compounded' || type == 'ingredient') {
+      _form = type;
+    }
+    final moist = bag['declared_moisture_pct'];
+    if (_moisture.text.trim().isEmpty && moist != null) {
+      _moisture.text = '$moist';
+    }
+    setState(() {
+      _ingredientFieldEpoch++;
+      _tab = 0;
+    });
+  }
+
+  Map<String, dynamic>? get _qrBag {
+    final payload = _qrPayload;
+    if (payload == null || payload.isEmpty) return null;
+    return decodeQrPayload(payload);
+  }
 
   Future<void> _speak() async {
     final spoken = Map<String, dynamic>.from(_result?['spoken'] as Map? ?? {});
@@ -275,7 +312,13 @@ class _HomePageState extends State<HomePage> {
                 _TestTab(state: this),
                 _ResultTab(state: this),
                 _KitTab(state: this),
-                QrTab(t: t),
+                QrTab(
+                  t: t,
+                  payload: _qrPayload,
+                  onScanned: _onQrScanned,
+                  onUseInTest: _useQrInTest,
+                  onClear: _clearQr,
+                ),
               ],
             ),
           ),
@@ -417,6 +460,8 @@ class _TestTab extends StatelessWidget {
               Text(t.ingredient, style: Type.label()),
               const SizedBox(height: 8),
               Autocomplete<String>(
+                key: ValueKey(state._ingredientFieldEpoch),
+                initialValue: TextEditingValue(text: state._ingredient),
                 optionsBuilder: (v) {
                   final q = v.text.toLowerCase();
                   final all = state._ingredients;
@@ -437,6 +482,27 @@ class _TestTab extends StatelessWidget {
                   );
                 },
               ),
+              if (state._qrBag != null) ...[
+                const SizedBox(height: 12),
+                Material(
+                  color: Brand.cream,
+                  borderRadius: BorderRadius.circular(12),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                    leading: Icon(Icons.qr_code_2, color: Brand.leaf),
+                    title: Text(t.qrAttached, style: Type.bodyStrong()),
+                    subtitle: Text(
+                      '${state._qrBag!['manufacturer'] ?? '—'} · ${state._qrBag!['batch_no'] ?? '—'}',
+                      style: Type.body(size: 13, color: Brand.mute),
+                    ),
+                    trailing: IconButton(
+                      tooltip: t.qrClear,
+                      onPressed: state._clearQr,
+                      icon: const Icon(Icons.close, size: 20),
+                    ),
+                  ),
+                ),
+              ],
               const SizedBox(height: 20),
               Text(t.sectionSensors.toUpperCase(), style: Type.section()),
               const SizedBox(height: 12),
@@ -569,6 +635,7 @@ class _ResultTab extends StatelessWidget {
     final urea = modules['urea'] as Map? ?? {};
     final nir = modules['nir'] as Map? ?? {};
     final af = modules['aflatoxin'] as Map? ?? {};
+    final qr = modules['qr'] as Map? ?? {};
     final ration = data['ration'] as Map? ?? {};
     final action = '${farmer['action'] ?? 'feed'}';
     final label = t.hi ? farmer['label_hi'] : farmer['label_en'];
@@ -638,6 +705,7 @@ class _ResultTab extends StatelessWidget {
           label: Text(t.hear),
         ),
         const SizedBox(height: 16),
+        if (qr['present'] == true && qr['decoded'] == true) _qrResultCard(t, qr),
         LayoutBuilder(
           builder: (context, box) {
             final width = (box.maxWidth - 10) / 2;
@@ -690,6 +758,42 @@ class _ResultTab extends StatelessWidget {
         ),
         Text('${data['disclaimer'] ?? ''}', style: Type.body(color: Brand.mute, size: 13)),
       ],
+    );
+  }
+
+  Widget _qrResultCard(L10n t, Map qr) {
+    final bag = Map<String, dynamic>.from(qr['bag_info'] as Map? ?? const {});
+    final verified = qr['verified'] == true;
+    final expired = qr['expired'] == true;
+    final color = verified ? Brand.feed : Brand.reject;
+    final title = expired ? t.qrExpired : (verified ? t.qrValid : t.qrMismatch);
+    final warns = List<String>.from(qr['warnings'] ?? const []);
+    return PaperCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+              Icon(verified ? Icons.verified : Icons.qr_code_2, color: color, size: 22),
+              const SizedBox(width: 8),
+              Expanded(child: Text(title, style: Type.bodyStrong(color: color))),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text('${bag['manufacturer'] ?? '—'} · ${bag['batch_no'] ?? '—'}', style: Type.body()),
+          Text('${t.qrExpiry}: ${bag['expiry_date'] ?? t.none}', style: Type.body(size: 14)),
+          Text(
+            '${t.qrDeclaredCp}: ${bag['declared_cp_pct_dm'] ?? t.none}% DM · ${t.qrDeclaredMoist}: ${bag['declared_moisture_pct'] ?? t.none}%',
+            style: Type.body(size: 14),
+          ),
+          if (warns.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            ...warns.map((w) => Text(w, style: Type.body(size: 13, color: Brand.reject))),
+          ],
+          const SizedBox(height: 6),
+          Text(t.qrNote, style: Type.body(size: 12, color: Brand.mute)),
+        ],
+      ),
     );
   }
 

@@ -265,6 +265,14 @@ String _english(
       'The kit colour chip sent 18 bands (410–940 nm). Those bands are stored but not used for protein — this chip cannot see the protein overtones.',
     );
   }
+  final qr = Map<String, dynamic>.from((result['modules'] as Map? ?? const {})['qr'] as Map? ?? const {});
+  if (qr['verified'] == true) {
+    parts.add('The bag QR matched the Indian tables and the moisture reading.');
+  } else if (qr['expired'] == true) {
+    parts.add('The bag QR is past its expiry date. Mix with a fresher lot or do not feed it as the only bag.');
+  } else if (qr['present'] == true && qr['decoded'] == true) {
+    parts.add('The bag QR did not match the tables or the moisture probe. Treat the label as untrusted.');
+  }
   final tips = List<String>.from(ration['tips_en'] ?? const []);
   if (tips.isNotEmpty) parts.add(tips.first);
   final reasons = List<String>.from(farmer['reasons_en'] ?? const []);
@@ -317,6 +325,14 @@ String _hindi(
   }
   if (nir['present'] == true && nir['used'] == false && '${nir['note']}'.contains('18')) {
     parts.add('किट के रंग चिप ने 18 बैंड भेजे (410–940 नैनोमीटर)। ये प्रोटीन के लिए इस्तेमाल नहीं हुए — इस चिप पर प्रोटीन बैंड नहीं आते।');
+  }
+  final qr = Map<String, dynamic>.from((result['modules'] as Map? ?? const {})['qr'] as Map? ?? const {});
+  if (qr['verified'] == true) {
+    parts.add('बोरी के QR ने तालिका और नमी रीडिंग से मेल खाया।');
+  } else if (qr['expired'] == true) {
+    parts.add('बोरी का QR समाप्त तिथि के बाद का है। ताज़ी बोरी के साथ मिलाएँ या अकेले न खिलाएँ।');
+  } else if (qr['present'] == true && qr['decoded'] == true) {
+    parts.add('बोरी का QR तालिका या नमी सेंसर से मेल नहीं खाता। लेबल पर भरोसा न करें।');
   }
   final tips = List<String>.from(ration['tips_hi'] ?? const []);
   if (tips.isNotEmpty) parts.add(tips.first);

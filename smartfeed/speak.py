@@ -75,6 +75,16 @@ def _english(name, action, farmer, nutrition, moisture, silage, nir, cv, ration,
             f"A 256-band forage NIR estimate is {pred}% CP on the Brazilian calibration only, not Indian oilcake or silage."
         )
 
+    qr = (result.get("modules") or {}).get("qr") or {}
+    if qr.get("verified"):
+        parts.append("The bag QR matched the Indian tables and the moisture reading.")
+    elif qr.get("expired"):
+        parts.append(
+            "The bag QR is past its expiry date. Mix with a fresher lot or do not feed it as the only bag."
+        )
+    elif qr.get("present") and qr.get("decoded"):
+        parts.append("The bag QR did not match the tables or the moisture probe. Treat the label as untrusted.")
+
     tips = ration.get("tips_en") or []
     if tips:
         parts.append(tips[0])
@@ -141,6 +151,14 @@ def _hindi(name, action, farmer, nutrition, moisture, silage, nir, cv, ration, r
         parts.append(
             f"256-बैंड चारा NIR अनुमान {pred}% CP है, केवल ब्राज़ील वाली कैलिब्रेशन पर, भारतीय खली या साइलेज पर नहीं।"
         )
+
+    qr = (result.get("modules") or {}).get("qr") or {}
+    if qr.get("verified"):
+        parts.append("बोरी के QR ने तालिका और नमी रीडिंग से मेल खाया।")
+    elif qr.get("expired"):
+        parts.append("बोरी का QR समाप्त तिथि के बाद का है। ताज़ी बोरी के साथ मिलाएँ या अकेले न खिलाएँ।")
+    elif qr.get("present") and qr.get("decoded"):
+        parts.append("बोरी का QR तालिका या नमी सेंसर से मेल नहीं खाता। लेबल पर भरोसा न करें।")
 
     tips = ration.get("tips_hi") or []
     if tips:

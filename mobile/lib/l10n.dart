@@ -101,6 +101,21 @@ class L10n {
   String get qrDeclaredMoist => hi ? 'घोषित नमी' : 'Declared moisture';
   String get qrBis => hi ? 'BIS लाइसेंस' : 'BIS license';
   String get qrNote => hi
-      ? 'प्रोटोटाइप QR — उत्पादन में हस्ताक्षरित पेलोड का उपयोग होगा।'
-      : 'Prototype QR — production systems would use signed payloads.';
+      ? 'प्रोटोटाइप QR — उत्पादन में हस्ताक्षरित पेलोड का उपयोग होगा। तालिका और नमी की तुलना जाँच चलाने पर होती है।'
+      : 'Prototype QR — production systems would use signed payloads. Table and moisture checks run when you Test.';
+  String get qrUseInTest => hi ? 'जाँच में लगाएँ' : 'Use in test';
+  String get qrClear => hi ? 'बोरी हटाएँ' : 'Clear bag';
+  String get qrAttached => hi ? 'QR बोरी लगी है' : 'Bag QR attached';
+  String get qrInvalid => hi ? 'यह AgriFeed बोरी QR नहीं है।' : 'This is not an AgriFeed bag QR.';
+  String get qrIssue => hi ? 'डेमो बोरी QR' : 'Demo bag QR';
+  String get qrIssueLead => hi
+      ? 'मिल वाला QR दिखाएँ। दूसरा फ़ोन स्कैन कर सकता है।'
+      : 'Show a mill QR. A second phone can scan it.';
+  String get qrDemoValid => hi ? 'मान्य' : 'Valid';
+  String get qrDemoExpired => hi ? 'समाप्त' : 'Expired';
+  String get qrDemoMismatch => hi ? 'गलत CP' : 'Wrong CP';
+  String get qrMismatch => hi ? 'घोषणा मेल नहीं खाती' : 'Declaration mismatch';
+  String get qrCheckRunsOnTest => hi
+      ? 'घोषित प्रोटीन और नमी की तुलना जाँच टैब पर होती है।'
+      : 'Declared protein and moisture are checked on the Test tab.';
 }

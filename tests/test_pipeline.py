@@ -165,3 +165,8 @@ def test_qr_payload_verification():
     assert out_mis["modules"]["qr"]["cp_mismatch"] is True
     assert out_mis["decision"]["action"] == "dilute"
 
+    raw_json = '{"manufacturer": "Amul Feed Co", "expiry_date": "2027-08-01"}'
+    out_json = assess("mustard cake", moisture_pct=10.0, qr_payload=raw_json)
+    assert out_json["modules"]["qr"]["decoded"] is True
+    assert out_json["modules"]["qr"]["bag_info"]["manufacturer"] == "Amul Feed Co"
+

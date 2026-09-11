@@ -32,7 +32,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>AgriFeed-AI uses location only to join the sensor board Wi-Fi named SmartFeed.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>AgriFeed-AI takes a mould photo of the bag or pit. It does not measure protein or aflatoxin ppb.</string>
+	<string>AgriFeed-AI scans the bag QR and can take a mould photo. It does not measure protein or aflatoxin ppb.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Choose a mould photo of the feed if the camera is not used.</string>
 	<key>NSMicrophoneUsageDescription</key>

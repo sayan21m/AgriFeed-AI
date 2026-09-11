@@ -29,9 +29,17 @@ def generate_qr_payload(data: dict) -> str:
 
 def decode_qr_payload(payload: str) -> dict | None:
     """Decode a base64 QR payload back to a dict.  Returns None on failure."""
+    text = (payload or "").strip()
+    if text.startswith("{"):
+        try:
+            parsed = json.loads(text)
+            return parsed if isinstance(parsed, dict) else None
+        except Exception:
+            return None
     try:
-        raw = base64.urlsafe_b64decode(payload.encode())
-        return json.loads(raw)
+        raw = base64.urlsafe_b64decode(text.encode())
+        parsed = json.loads(raw)
+        return parsed if isinstance(parsed, dict) else None
     except Exception:
         return None
 
@@ -113,6 +121,7 @@ def verify_qr(payload: str, nutrition_result: dict | None = None) -> dict:
             "declared_moisture_pct": declared_moisture,
             "bis_license": bag.get("bis_license"),
             "feed_type": bag.get("feed_type"),
+            "ingredient": bag.get("ingredient"),
         },
         "note": "Prototype QR verification. Production systems should use signed payloads.",
     }

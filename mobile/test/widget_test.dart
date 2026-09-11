@@ -14,6 +14,7 @@ void main() {
     expect(find.text('Test'), findsWidgets);
     expect(find.text('Verdict'), findsOneWidget);
     expect(find.text('Kit'), findsWidgets);
+    expect(find.text('Verify Bag'), findsOneWidget);
     expect(find.text('Connect'), findsOneWidget);
     expect(find.textContaining('192.168'), findsNothing);
   });

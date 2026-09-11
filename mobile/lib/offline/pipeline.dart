@@ -1,6 +1,7 @@
 import 'package:smartfeed_app/offline/copy.dart';
 import 'package:smartfeed_app/offline/cv_mould.dart';
 import 'package:smartfeed_app/offline/nutrition.dart';
+import 'package:smartfeed_app/offline/qr.dart';
 import 'package:smartfeed_app/offline/screens.dart';
 import 'package:smartfeed_app/offline/sensors.dart';
 
@@ -49,6 +50,19 @@ Map<String, dynamic> decide(Map<String, dynamic> parts) {
     triggers.add(('reject', 'high-AF-risk ingredient plus mould'));
   }
 
+  final qr = Map<String, dynamic>.from(parts['qr'] as Map? ?? const {});
+  if (qr['decoded'] == true) {
+    if (qr['expired'] == true) {
+      triggers.add(('dilute', 'bag past expiry date (QR)'));
+    }
+    if (qr['cp_mismatch'] == true) {
+      triggers.add(('dilute', 'declared CP does not match tables (QR)'));
+    }
+    if (qr['moisture_mismatch'] == true) {
+      triggers.add(('dilute', 'declared moisture does not match measurement (QR)'));
+    }
+  }
+
   if (triggers.isEmpty) {
     return {'action': 'feed', 'reasons': ['no reject/dilute trigger from sensors + tables']};
   }
@@ -74,6 +88,7 @@ Future<Map<String, dynamic>> assess({
   double? aiaPct,
   double? gritSettledMl,
   double? sampleG,
+  String? qrPayload,
 }) async {
   final sensorWarnings = checkAll({
     'moisture_pct': moisturePct,
@@ -94,6 +109,9 @@ Future<Map<String, dynamic>> assess({
   final aflatoxin = assessAflatoxin(ingredient, visibleMould: mouldFlag);
   final nir = assessNir(nirAbsorbance);
   final sand = assessSand(aiaPct: aiaPct, gritSettledMl: gritSettledMl, sampleG: sampleG, form: form);
+  final qr = qrPayload != null && qrPayload.isNotEmpty
+      ? verifyQr(qrPayload, nutrition)
+      : {'present': false, 'note': 'No QR code scanned.'};
   final parts = {
     'nutrition': nutrition,
     'moisture': moisture,
@@ -103,6 +121,7 @@ Future<Map<String, dynamic>> assess({
     'aflatoxin': aflatoxin,
     'sand': sand,
     'nir': nir,
+    'qr': qr,
   };
   final decision = decide(parts);
   final farmer = farmerCard(decision);
@@ -117,7 +136,8 @@ Future<Map<String, dynamic>> assess({
     'sensor_warnings': sensorWarnings,
     'modules': parts,
     'disclaimer':
-        'Village kit on this phone: lookup + moisture + pH + 4-DMAB + mould screen + AIA sand check. '
+        'Village kit on this phone: lookup + moisture + pH + 4-DMAB + mould screen + AIA sand check + bag QR. '
+        'QR is unsigned prototype authenticity, not a mill cryptographic seal. '
         'NIR CP is only valid on the Brazilian forage matrix, not AS7265x. ExtraTrees / CNN stay in the notebooks.',
   };
   out['spoken'] = spokenAdvice(out);
