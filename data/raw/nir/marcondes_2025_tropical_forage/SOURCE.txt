@@ -9,4 +9,4 @@ n: 291 tropical forage samples (Brazil), paired absorbance + wet chemistry
 File: Data.xlsx downloaded from https://ndownloader.figshare.com/files/53431202
 
 This is NOT Indian cattle-feed or compounded-feed NIR. Do not report these
-calibrations as SmartFeed India bag protein.
+calibrations as AgriFeed-AI bag protein.

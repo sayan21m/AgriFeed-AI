@@ -10,7 +10,7 @@ void main() {
     await tester.pumpWidget(const SmartFeedApp());
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 50));
-    expect(find.text('SmartFeed'), findsOneWidget);
+    expect(find.text('AgriFeed-AI'), findsOneWidget);
     expect(find.text('Test'), findsWidgets);
     expect(find.text('Verdict'), findsOneWidget);
     expect(find.text('Kit'), findsWidgets);

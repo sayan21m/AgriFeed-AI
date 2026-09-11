@@ -308,8 +308,9 @@ class _TopBar extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ClipOval(
-                child: Image.asset(Brand.mark, width: 42, height: 42, fit: BoxFit.cover),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(Brand.logo, width: 42, height: 42, fit: BoxFit.cover),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -318,7 +319,12 @@ class _TopBar extends StatelessWidget {
                   children: [
                     Text(t.kicker, style: Type.kicker(color: Brand.onPhotoSoft)),
                     const SizedBox(height: 2),
-                    Text(t.title, style: Type.displayMd(color: Brand.onPhoto)),
+                    Text(
+                      t.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Type.displayMd(color: Brand.onPhoto).copyWith(fontSize: 20),
+                    ),
                   ],
                 ),
               ),

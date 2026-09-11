@@ -22,7 +22,7 @@ class SmartFeedApp extends StatelessWidget {
       ),
     );
     return MaterialApp(
-      title: 'SmartFeed',
+      title: 'AgriFeed-AI',
       debugShowCheckedModeBanner: false,
       theme: base.copyWith(
         scaffoldBackgroundColor: Brand.cream,

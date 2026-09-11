@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>SmartFeed</string>
+	<string>AgriFeed-AI</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>smartfeed_app</string>
+	<string>AgriFeed-AI</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -30,9 +30,9 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>SmartFeed uses location only to join the sensor board Wi-Fi named SmartFeed.</string>
+	<string>AgriFeed-AI uses location only to join the sensor board Wi-Fi named SmartFeed.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>SmartFeed takes a mould photo of the bag or pit. It does not measure protein or aflatoxin ppb.</string>
+	<string>AgriFeed-AI takes a mould photo of the bag or pit. It does not measure protein or aflatoxin ppb.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Choose a mould photo of the feed if the camera is not used.</string>
 	<key>NSMicrophoneUsageDescription</key>

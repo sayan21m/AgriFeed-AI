@@ -23,6 +23,7 @@ class Brand {
   static const forage = 'assets/images/forage.jpg';
   static const fields = 'assets/images/silage.jpg';
   static const mark = 'assets/images/mark.jpg';
+  static const logo = 'assets/images/logo.png';
 
   static const pagePad = EdgeInsets.fromLTRB(20, 16, 20, 32);
   static const gap = 12.0;

@@ -1,4 +1,4 @@
-# SmartFeed India
+# AgriFeed-AI
 
 **Project report · Smart India Hackathon 2026 · College internal round**
 
@@ -8,7 +8,7 @@
 | Title | Rapid, low-cost, portable digital kit for cattle feed and silage quality |
 | Ministry | Fisheries, Animal Husbandry & Dairying |
 | Category | Software (with a village hardware kit) |
-| Product | Bilingual farmer app (on-device scoring) + ESP32 measurement board |
+| Product | **AgriFeed-AI** bilingual farmer app (on-device scoring) + ESP32 measurement board |
 | Date | September 2026 |
 
 ---
@@ -17,7 +17,7 @@
 
 Indian dairy farmers buy oilcakes, bran, compounded feed and silage with almost no village-level test. Adulteration (urea, sand), high moisture, poor fermentation and mould are common, but a mill NIR lab is too slow and too expensive for a bag bought at the mandi.
 
-**SmartFeed India** is a five-minute kit. The farmer names the feed (English or Hindi aliases such as *sarson khali*). The ESP32 **only measures** moisture, optional silage pH and an 18-band AS7265x colour chip. The phone holds the tables, takes the mould photo, converts % dry matter to as-fed, screens urea and sand, scores silage with the Flieg formula, and speaks **Feed / Dilute / Reject** (खिलाएँ / मिलाकर खिलाएँ / न खिलाएँ).
+**AgriFeed-AI** is a five-minute kit. The farmer names the feed (English or Hindi aliases such as *sarson khali*). The ESP32 **only measures** moisture, optional silage pH and an 18-band AS7265x colour chip. AgriFeed-AI holds the tables, takes the mould photo, converts % dry matter to as-fed, screens urea and sand, scores silage with the Flieg formula, and speaks **Feed / Dilute / Reject** (खिलाएँ / मिलाकर खिलाएँ / न खिलाएँ).
 
 The design is deliberately honest. Moisture is not protein. Phone RGB is not NIR. The AS7265x (410–940 nm) is recorded but **refused for crude-protein scoring** because protein N–H overtones sit near 1510–2180 nm and no Indian paired calibration exists for this chip. Aflatoxin is a historical risk table, not µg/kg. A public Brazilian forage NIR set is used only to show that real spectra *can* beat a name model — not as a claim on Indian oilcake or silage.
 
@@ -50,10 +50,10 @@ A FOSS or Bruker mill NIR is the industry gold standard. It is not a village kit
 ## 4. Proposed solution
 
 ```
-Farmer phone (Flutter, fully offline)
+AgriFeed-AI (Flutter, fully offline)
   name + photo + EN/HI UI + tables + Flieg/urea/sand/HSV
         ▲  optional /api/sensors
-ESP32 hotspot SmartFeed  (moisture · pH · 18× AS7265x log)
+ESP32 hotspot SSID SmartFeed  (moisture · pH · 18× AS7265x log)
 ```
 
 **What each input is allowed to do**
@@ -64,7 +64,7 @@ ESP32 hotspot SmartFeed  (moisture · pH · 18× AS7265x log)
 | Moisture probe | Convert % DM → as-fed; flag wet compounded feed / wet silage | Protein |
 | Pocket pH | Flieg score with dry matter | NIR fermentation |
 | 4-DMAB yellow area | Ridge screen on Anitha 2022 (1–10 g/kg) | Kjeldahl urea |
-| Phone photo / mould tick | CNN (deployed) vs HSV side-check | AFB1 µg/kg |
+| Phone photo / mould tick | HSV on AgriFeed-AI; CNN desk-only | AFB1 µg/kg |
 | Settling jar / AIA % | Sand suspicion or BIS fail | NIR sand |
 | AS7265x 18 bands | Logged, then **refused** for CP | Indian oilcake protein |
 | 256-band forage NIR | Demo model on Brazilian tropical forage only | Indian bags |
@@ -81,7 +81,7 @@ Verdicts are **feed < dilute < reject**. Every module may raise a trigger; the p
 |---|---|
 | `smartfeed/` | Models, validation, fusion, spoken paragraph |
 | `app/` | FastAPI backend, kit ingest, model pack |
-| `mobile/` | Flutter farmer app (on-device tables + rules, EN/HI, camera, TTS) |
+| `mobile/` | **AgriFeed-AI** Flutter app (on-device tables + rules, EN/HI, camera, TTS, logo) |
 | `models/` | Runtime ExtraTrees / Ridge / CNN / PLS pack (replace + reload) |
 | `firmware/esp32/` | ESP32 measurement sketch (no models on the MCU) |
 | `notebooks/` | One notebook per module, with `artifacts/metrics.json` |
@@ -103,7 +103,7 @@ CLI: `python3 -m smartfeed "mustard cake" --moisture 10 --lang hi`
 
 ### 5.2 Hardware (village kit)
 
-**Offline mode (what we take to the field):** the Flutter app already holds the 77 Indian ingredient ranges, aliases, Flieg, 4-DMAB slopes and sand/BIS rules. The ESP32 opens a Wi-Fi hotspot named `SmartFeed` and only serves `GET /api/sensors` (moisture, pH, 18 AS7265x bands). There is no laptop, no internet, and **no model on the MCU**.
+**Offline mode (what we take to the field):** AgriFeed-AI already holds the 77 Indian ingredient ranges, aliases, Flieg, 4-DMAB slopes and sand/BIS rules. The ESP32 opens a Wi-Fi hotspot named `SmartFeed` and only serves `GET /api/sensors` (moisture, pH, 18 AS7265x bands). There is no laptop, no internet, and **no model on the MCU**.
 
 Unknown names on the phone fall back to a keyword class and that class’s CP range. ExtraTrees / 256-band PLS stay in notebooks. AS7265x is refused for crude protein. Mould is a phone tick or HSV photo: the ESP32 does not decode a JPEG.
 
@@ -112,13 +112,13 @@ Unknown names on the phone fall back to a keyword class and that class’s CP ra
 | Capacitive moisture | GPIO 34 | Calibrate dry / wet raw counts |
 | Analog pH (silage) | GPIO 35 | Optional; pH 4 and 7 buffers |
 | AS7265x triad (51+52+53) | I2C 21 / 22, addr `0x49` | 18 bands logged, not scored as CP |
-| Farmer phone | joins `SmartFeed` AP | Scoring + screen + speaker |
+| Farmer phone | AgriFeed-AI joins `SmartFeed` AP | Scoring + screen + speaker + logo |
 
 Without a board, `python3 firmware/simulate_kit.py --moisture 10` posts the same JSON.
 
 ### 5.3 Farmer flow
 
-1. Open the **Flutter** app. Tables are already on the phone. Optional: switch the board on and tap **Connect** (the app joins Wi-Fi `SmartFeed`).
+1. Open **AgriFeed-AI**. Tables are already on the phone. Optional: switch the board on and tap **Connect** (the app joins Wi-Fi `SmartFeed`).
 2. Name the feed (`sarson khali`, mustard cake, maize silage, …).
 3. **Connect** fills moisture / pH, or type them.
 4. Take a photo on the phone if mould is possible.
@@ -130,7 +130,7 @@ Without a board, `python3 firmware/simulate_kit.py --moisture 10` posts the same
 
 Public Indian sources are **reference tables and paper summaries**, not a national bag-level CSV. That is why known names return a **min–max range**.
 
-| Source | Use in SmartFeed |
+| Source | Use in AgriFeed-AI |
 |---|---|
 | NDDB *Nutritive Value of Commonly Available Feeds and Fodders in India* (2012) | Concentrate and roughage lookup |
 | BIS **IS 2052:2023** compounded cattle feed | Moisture ≤ 11%; CP ≥ 22 / 20% DM (Type I / II); AIA ≤ 2.5 / 3.0%; urea ≤ 1% DM; AFB1 ≤ 20 µg/kg |
@@ -198,10 +198,10 @@ A **CNN** was trained on 1,920 synthetic 32×32 patches: clean cake, clean bran,
 
 | Model | Accuracy | Note |
 |---|---|---|
-| CNN (deployed) | **1.00** | On this synthetic split |
+| CNN (desk / notebook only) | **1.00** | On this synthetic split; **not** in AgriFeed-AI |
 | HSV colour screen | 0.54 | High recall, false-flags green fodder |
 
-HSV is kept as a side check. The farmer checkbox still works with no photo. **Not AFB1 µg/kg. Not real bag photos.** The 1.00 figure will not hold on dusty mandi lighting until we have labelled Indian bags.
+AgriFeed-AI uses the HSV screen plus the farmer checkbox. The CNN is not in the APK. **Not AFB1 µg/kg. Not real bag photos.** The 1.00 figure will not hold on dusty mandi lighting until we have labelled Indian bags.
 
 ### 7.6 Sand / silica
 
@@ -247,7 +247,7 @@ Impossible readings (moisture 150%, pH 99) raise `SensorRangeError` instead of p
 
 - Python 3.10+, FastAPI, scikit-learn ≥ 1.8 (joblib artifacts pickled with 1.8.x), scipy, Pillow.
 - Runtime weights sit in `models/` (~3 MB). Notebooks stay the training source. `POST /api/models/reload` drops RAM caches after a file swap.
-- The farmer UI is a **Flutter** app (`mobile/`). Scoring runs **on the phone** (bundled `offline_kit.json` + the same feed/dilute/reject rules). ExtraTrees / CNN / PLS stay in notebooks and the optional desk FastAPI.
+- The farmer UI is **AgriFeed-AI** (`mobile/`). Home-screen name and mark: `mobile/assets/images/logo.png`. Scoring runs **on the phone** (bundled `offline_kit.json` + the same feed/dilute/reject rules). ExtraTrees / CNN / PLS stay in notebooks and the optional desk FastAPI.
 - Photo mould on the phone is HSV. The synthetic CNN is not shipped in the APK.
 - Spoken text is assembled from the verdict, CP range, moisture conversion, Flieg, mould, and an explicit sentence when 18 bands were ignored.
 - Offline intent of the PS: the APK scores without a laptop or internet. The ESP32 is optional and measurement-only.
@@ -304,7 +304,7 @@ python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8000
 python3 firmware/simulate_kit.py --moisture 10
 ```
 
-Open `http://127.0.0.1:8000` for a desk browser demo, or run the Flutter app:
+Open `http://127.0.0.1:8000` for a desk browser demo, or run AgriFeed-AI:
 
 ```bash
 cd mobile && flutter run
@@ -338,7 +338,7 @@ ESP32 flash instructions: `firmware/esp32/README.md`.
 
 **Problem.** Village dairy farmers cannot test the bag or the pit in five minutes.
 
-**What we built.** A bilingual app + ESP32 kit that looks up Indian tables, reads moisture and pH, screens urea / sand / mould, and **says** feed, mix, or reject.
+**What we built.** AgriFeed-AI + an ESP32 kit that looks up Indian tables, reads moisture and pH, screens urea / sand / mould, and **says** feed, mix, or reject.
 
 **Numbers we stand behind.** 77 ingredients; name-model CP MAE **5.11% DM**; class accuracy **79.6%**; Brazilian forage NIR CP MAE **1.39% DM** (leave-one-species-out); 29 automated tests.
 

@@ -2,7 +2,7 @@ class L10n {
   L10n(this.hi);
   final bool hi;
 
-  String get title => hi ? 'स्मार्टफीड' : 'SmartFeed';
+  String get title => 'AgriFeed-AI';
   String get kicker => hi ? 'SIH26111 · पशुपालन विभाग' : 'SIH26111 · DAHD';
   String get tagline => hi ? 'गाँव का पशु आहार किट' : 'Village cattle feed kit';
   String get heroLine =>

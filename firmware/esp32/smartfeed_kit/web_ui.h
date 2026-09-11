@@ -6,7 +6,7 @@ static const char INDEX_HTML[] PROGMEM = R"HTML(
 <html lang="en">
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>SmartFeed probe</title>
+<title>AgriFeed-AI probe</title>
 <style>
 body{font-family:Georgia,serif;background:#f4efe4;color:#101610;margin:0}
 .top{background:#1b3a24;color:#fff8ec;padding:18px}
@@ -19,13 +19,13 @@ h1{margin:4px 0 8px;font-size:24px}
 <body>
 <div class="top">
   <p class="note" style="color:#f6e9c8">SIH26111 · measurement only</p>
-  <h1>SmartFeed probe</h1>
-  <p>This board only measures moisture, pH and the colour chip. Open the <b>SmartFeed</b> phone app to score the feed. Models are not on the ESP32.</p>
+  <h1>AgriFeed-AI probe</h1>
+  <p>This board only measures moisture, pH and the colour chip. Open the <b>AgriFeed-AI</b> phone app to score the feed. Models are not on the board.</p>
 </div>
 <div class="card">
   <p id="st">Reading sensors…</p>
   <button class="ghost" type="button" id="pull">Refresh sensors</button>
-  <p class="note" id="hint">Join Wi-Fi SmartFeed, then tap Use kit in the app.</p>
+  <p class="note" id="hint">In AgriFeed-AI, tap Connect. The app joins Wi-Fi SmartFeed.</p>
 </div>
 <script>
 async function pull(){

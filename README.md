@@ -1,11 +1,11 @@
-# SmartFeed India — SIH26111
+# AgriFeed-AI — SIH26111
 
 Rapid, offline-friendly **cattle feed and silage** quality kit for Indian dairy farmers.  
 Ministry of Fisheries, Animal Husbandry & Dairying · [problem statement](https://sih2026.vuce.in/ps/SIH26111)
 
-This is **not** a FOSS mill NIR. Known feeds return Indian table **ranges**. Sensors convert units or screen adulteration. The app decides **feed / dilute / reject**.
+The farmer app is **AgriFeed-AI** (logo on the home screen and in the top bar). This is **not** a FOSS mill NIR. Known feeds return Indian table **ranges**. Sensors convert units or screen adulteration. The app decides **feed / dilute / reject**.
 
-## Run the farmer app (fully offline)
+## Run AgriFeed-AI (fully offline)
 
 Scoring is **on the phone**. No laptop server.
 
@@ -15,7 +15,7 @@ flutter pub get
 flutter run
 ```
 
-English / हिंदी, camera photo, spoken verdict. Type moisture / pH, or switch the board on and tap **Connect** — the app joins Wi-Fi **SmartFeed**. Unknown names use a keyword class (not ExtraTrees). Photo mould is HSV (not the synthetic CNN). AS7265x is refused for CP.
+English / हिंदी, camera photo, spoken verdict. Type moisture / pH, or switch the board on and tap **Connect** — AgriFeed-AI joins Wi-Fi **SmartFeed** (that is the board’s hotspot name). Unknown names use a keyword class (not ExtraTrees). Photo mould is HSV (not the synthetic CNN). AS7265x is refused for CP.
 
 Rebuild the bundled tables after CSV changes:
 
@@ -25,7 +25,7 @@ python3 firmware/export_offline_tables.py
 
 ## ESP32 probe (measurement only)
 
-The board **does not score**. Flash `firmware/esp32/smartfeed_kit/`, power it, then tap **Connect** in the Flutter app. The app joins Wi-Fi **SmartFeed** and reads moisture, pH and 18 AS7265x bands from `GET /api/sensors`. Tables, Flieg, urea, sand and the verdict stay on the phone.
+The board **does not score**. Flash `firmware/esp32/smartfeed_kit/`, power it, then tap **Connect** in AgriFeed-AI. The app joins Wi-Fi **SmartFeed** and reads moisture, pH and 18 AS7265x bands from `GET /api/sensors`. Tables, Flieg, urea, sand and the verdict stay on the phone.
 
 ```bash
 python3 firmware/export_offline_tables.py   # rebuild mobile/assets/offline_kit.json
@@ -42,9 +42,9 @@ python3 -m pip install -r requirements.txt
 python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
-A browser at http://127.0.0.1:8000 still works for a desk demo. The product UI is the Flutter app.
+A browser at http://127.0.0.1:8000 still works for a desk demo. The product UI is AgriFeed-AI.
 
-Full write-up for the college internal round: [`docs/SmartFeed_India_Project_Report.md`](docs/SmartFeed_India_Project_Report.md).
+Full write-up for the college internal round: [`docs/AgriFeed_AI_Project_Report.md`](docs/AgriFeed_AI_Project_Report.md).
 
 ## CLI
 
@@ -62,10 +62,11 @@ Prints a farmer card by default (`--lang en|hi`); `--json` gives the full result
 
 | Path | Role |
 |---|---|
+| `mobile/` | **AgriFeed-AI** Flutter app — on-device tables + rules + logo |
+| `mobile/assets/offline_kit.json` | 77 feeds, Flieg, urea, BIS, Kotinagu |
+| `mobile/assets/images/logo.png` | AgriFeed-AI mark and launcher icon |
 | `smartfeed/` | Models + fused `assess()` (Python / desk) |
 | `app/` | FastAPI desk backend (optional) |
-| `mobile/` | Flutter farmer app — **on-device** tables + rules |
-| `mobile/assets/offline_kit.json` | 77 feeds, Flieg, urea, BIS, Kotinagu |
 | `models/` | ExtraTrees / Ridge / CNN / PLS for notebooks + desk API |
 | `firmware/esp32/` | ESP32 sketch: moisture, pH, AS7265x only |
 | `notebooks/ml/` | Name → nutrition (79.6% class acc, CP MAE 5.11 % DM) |
@@ -110,4 +111,3 @@ Flutter: widget smoke + on-device pipeline (same verdicts as Python for known fe
 The joblib artifacts were pickled with scikit-learn 1.8.x. Installing an older
 sklearn still loads them but warns that results may be invalid, so keep the
 pinned floor in `requirements.txt`.
-

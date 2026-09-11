@@ -1,4 +1,4 @@
-Unsplash (https://unsplash.com/license), bundled for SmartFeed India UI:
+Unsplash (https://unsplash.com/license), bundled for AgriFeed-AI UI:
 - hero_cattle.jpg  dairy herd on pasture
 - barn.jpg         cattle at dusk
 - cow.jpg          dairy cow portrait
@@ -7,7 +7,8 @@ Unsplash (https://unsplash.com/license), bundled for SmartFeed India UI:
 - forage.jpg       maize plants (silage crop)
 - silage.jpg       green crop beside dry crop
 
-App mark (mark.jpg) is a generated Gir-cow badge for the village kit.
+App logo (logo.png) is the AgriFeed-AI mark (cow + wheat) used in the top bar and as the launcher icon.
+Older Gir-cow badge (mark.jpg) is unused in the UI.
 
 Fonts (SIL Open Font License), bundled for offline use:
 - Source Serif 4 (Adobe) — display
