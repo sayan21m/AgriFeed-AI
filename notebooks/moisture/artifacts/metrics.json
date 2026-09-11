@@ -1,0 +1,6 @@
+{
+  "model": "as_fed_identity",
+  "formula": "value_asfed = value_dm * (1 - moisture/100)",
+  "bis_compounded_moisture_max": 11,
+  "measures_protein": false
+}

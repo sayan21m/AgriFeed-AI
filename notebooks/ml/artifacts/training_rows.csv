@@ -1,0 +1,134 @@
+raw_name,canonical,feed_class,form,source,cp_pct_dm,cf_pct_dm,ndf_pct_dm,ee_pct_dm,me_mcal_kg,moisture_pct,fibre_pct_dm
+Maize,maize,grains,ingredient,nddb_2012_concentrate,9.0,2.0,15.6,4.2,3.1,,2.0
+Sorghum,sorghum,grains,ingredient,nddb_2012_concentrate,8.7,3.0,10.9,2.5,3.0,,3.0
+Wheat,wheat,grains,ingredient,nddb_2012_concentrate,11.0,2.0,16.0,2.6,2.9,,2.0
+Barley,barley,grains,ingredient,nddb_2012_concentrate,12.0,5.9,20.0,2.5,2.8,,5.9
+Oats,oats,grains,ingredient,nddb_2012_concentrate,11.0,15.5,13.8,4.4,2.6,,15.5
+Rice,rice,grains,ingredient,nddb_2012_concentrate,9.0,10.1,12.5,1.5,2.8,,10.1
+Bajra,bajra,grains,ingredient,nddb_2012_concentrate,12.0,2.0,15.3,3.5,2.2,,2.0
+Black gram,black gram,grains,ingredient,nddb_2012_concentrate,29.0,5.3,17.0,1.0,2.5,,5.3
+Whole cottonseed,whole cottonseed,grains,ingredient,nddb_2012_concentrate,22.0,18.0,48.0,17.3,3.3,,18.0
+Wheat bran,wheat bran,byproducts,ingredient,nddb_2012_concentrate,16.0,15.0,64.0,2.2,2.7,,15.0
+Rice bran (de-oiled),rice bran deoiled,byproducts,ingredient,nddb_2012_concentrate,17.0,18.0,38.2,1.5,2.1,,18.0
+Rice polish,rice polish,byproducts,ingredient,nddb_2012_concentrate,14.0,12.0,19.4,14.0,2.7,,12.0
+Brewer's grain,brewer s grain,byproducts,ingredient,nddb_2012_concentrate,25.4,14.9,44.0,6.5,2.4,,14.9
+Cane molasses,molasses,molasses,ingredient,nddb_2012_concentrate,2.0,,,8.5,2.6,,
+Soybean meal,soybean meal,oilcakes,ingredient,nddb_2012_concentrate,53.0,7.0,18.6,1.4,2.5,,7.0
+Groundnut oil cake,groundnut cake,oilcakes,ingredient,nddb_2012_concentrate,40.0,7.4,23.3,8.2,2.8,,7.4
+Groundnut meal,groundnut meal,oilcakes,ingredient,nddb_2012_concentrate,44.0,13.2,31.2,1.0,2.7,,13.2
+Cottonseed meal (decorticated),cottonseed meal decorticated,oilcakes,ingredient,nddb_2012_concentrate,41.0,6.3,28.0,9.2,2.8,,6.3
+Cottonseed meal (undecorticated),cottonseed meal undecorticated,oilcakes,ingredient,nddb_2012_concentrate,22.8,24.1,53.9,9.2,2.5,,24.1
+Rapeseed meal,mustard meal,oilcakes,ingredient,nddb_2012_concentrate,42.0,8.5,23.8,1.0,2.5,,8.5
+Rape seed cake,mustard cake,oilcakes,ingredient,nddb_2012_concentrate,38.0,7.9,25.6,7.5,2.9,,7.9
+Sunflower meal (undecorticated),sunflower meal undecorticated,oilcakes,ingredient,nddb_2012_concentrate,31.0,25.3,39.9,6.7,1.9,,25.3
+Sesame oil cake,til cake,oilcakes,ingredient,nddb_2012_concentrate,30.0,8.0,14.3,10.0,2.3,,8.0
+Coconut meal,coconut meal,oilcakes,ingredient,nddb_2012_concentrate,30.0,9.0,37.6,0.5,2.3,,9.0
+Sorghum hay,sorghum hay,hay,forage,nddb_2012_roughage,7.0,38.9,56.5,1.2,1.9,,38.9
+Wheat hay,wheat hay,hay,forage,nddb_2012_roughage,3.5,41.5,72.3,1.0,1.9,,41.5
+Maize hay,maize hay,hay,forage,nddb_2012_roughage,3.6,33.2,62.2,0.8,2.1,,33.2
+Oats hay,oats hay,hay,forage,nddb_2012_roughage,5.6,35.9,58.0,1.7,2.0,,35.9
+Cowpea hay,cowpea hay,hay,forage,nddb_2012_roughage,15.0,34.8,54.0,1.1,1.8,,34.8
+Lucerne hay,lucerne hay,hay,forage,nddb_2012_roughage,16.0,29.4,43.6,1.4,2.0,,29.4
+Berseem hay,berseem hay,hay,forage,nddb_2012_roughage,15.0,30.6,49.6,6.6,2.4,,30.6
+Para grass hay,para grass hay,hay,forage,nddb_2012_roughage,5.3,34.6,64.4,2.0,1.7,,34.6
+Guinea grass hay,guinea grass hay,hay,forage,nddb_2012_roughage,7.6,38.1,60.5,1.2,1.7,,38.1
+Rhodes grass hay,rhodes grass hay,hay,forage,nddb_2012_roughage,9.4,36.2,72.0,1.2,2.1,,36.2
+Maize,maize,grains,ingredient,bis_annex_c,9.0,2.0,,4.0,,10.0,2.0
+Jowar,sorghum,grains,ingredient,bis_annex_c,8.0,1.0,,3.0,,9.0,1.0
+Bajra,bajra,grains,ingredient,bis_annex_c,10.0,3.0,,5.0,,9.0,3.0
+Barley,barley,grains,ingredient,bis_annex_c,9.0,4.0,,2.0,,10.0,4.0
+Oat,oats,grains,ingredient,bis_annex_c,11.0,9.0,,6.0,,7.0,9.0
+Gram,gram,grains,ingredient,bis_annex_c,22.0,10.0,,3.0,,9.0,10.0
+Horse gram,horse gram,grains,ingredient,bis_annex_c,25.0,6.0,,1.0,,9.0,6.0
+Tuar chuni,arhar chuni,byproducts,ingredient,bis_annex_c,20.0,18.0,,3.0,,7.0,18.0
+Gram chuni,gram chuni,byproducts,ingredient,bis_annex_c,17.0,15.0,,1.0,,8.0,15.0
+Arhar chuni,arhar chuni,byproducts,ingredient,bis_annex_c,18.0,9.0,,2.0,,7.0,9.0
+Mung chuni,mung chuni,byproducts,ingredient,bis_annex_c,20.0,16.0,,1.0,,8.0,16.0
+Maize bran,maize bran,byproducts,ingredient,bis_annex_c,11.0,9.0,,2.0,,8.0,9.0
+Moth chuni,moth chuni,byproducts,ingredient,bis_annex_c,13.0,12.0,,3.0,,7.0,12.0
+Wheat bran,wheat bran,byproducts,ingredient,bis_annex_c,15.0,10.0,,4.0,,8.0,10.0
+Rice bran,rice bran,byproducts,ingredient,bis_annex_c,13.0,12.0,,16.0,,9.0,12.0
+Deoiled rice bran,deoiled rice bran,byproducts,ingredient,bis_annex_c,15.0,15.0,,,,10.0,15.0
+Guar meal,guar meal,byproducts,ingredient,bis_annex_c,46.0,7.0,,5.0,,9.0,7.0
+Gram husk,gram husk,byproducts,ingredient,bis_annex_c,6.0,48.0,,1.0,,8.0,48.0
+Rapeseed oil cake,mustard cake,oilcakes,ingredient,bis_annex_c,34.0,8.0,,8.0,,9.0,8.0
+Rapeseed meal,mustard meal,oilcakes,ingredient,bis_annex_c,38.0,11.0,,,,10.0,11.0
+Sunflower meal,sunflower meal,oilcakes,ingredient,bis_annex_c,28.0,29.0,,,,10.0,29.0
+Soyabean meal,soybean meal,oilcakes,ingredient,bis_annex_c,45.0,7.0,,,,10.0,7.0
+Cottonseed oil cake (undecorticated),cottonseed oil cake undecorticated,oilcakes,ingredient,bis_annex_c,22.0,23.0,,6.0,,10.0,23.0
+Cottonseed meal,cottonseed meal,oilcakes,ingredient,bis_annex_c,37.0,15.0,,,,10.0,15.0
+Coconut oil cake,coconut cake,oilcakes,ingredient,bis_annex_c,23.0,8.0,,8.0,,9.0,8.0
+Coconut meal,coconut meal,oilcakes,ingredient,bis_annex_c,27.0,9.0,,,,10.0,9.0
+Groundnut oil cake,groundnut cake,oilcakes,ingredient,bis_annex_c,42.0,7.0,,8.0,,10.0,7.0
+Groundnut meal,groundnut meal,oilcakes,ingredient,bis_annex_c,44.0,11.0,,,,10.0,11.0
+Maize cake,maize cake,oilcakes,ingredient,bis_annex_c,22.0,11.0,,11.0,,7.0,11.0
+Til oil cake,til cake,oilcakes,ingredient,bis_annex_c,34.0,8.0,,10.0,,7.0,8.0
+Nigerseed oil cake,nigerseed oil cake,oilcakes,ingredient,bis_annex_c,36.0,16.0,,6.0,,9.0,16.0
+Tapioca thippi,tapioca thippi,oilcakes,ingredient,bis_annex_c,3.0,11.0,,0.5,,6.0,11.0
+Safflower meal,safflower meal,oilcakes,ingredient,bis_annex_c,20.0,33.0,,,,6.0,33.0
+Linseed oil cake,linseed cake,oilcakes,ingredient,bis_annex_c,32.0,9.0,,5.0,,7.0,9.0
+Babul chuni,babul chuni,waste,ingredient,bis_annex_c,16.0,13.0,,4.0,,8.0,13.0
+Prosopis juliflora pods,prosopis juliflora pods,waste,ingredient,bis_annex_c,14.0,18.0,,3.0,,5.0,18.0
+Tamarind seed powder,tamarind seed powder,waste,ingredient,bis_annex_c,14.0,4.0,,5.0,,7.0,4.0
+Ambadi oil cake,ambadi oil cake,waste,ingredient,bis_annex_c,22.0,18.0,,5.0,,6.0,18.0
+Mango seed kernel,mango seed kernel,waste,ingredient,bis_annex_c,6.0,3.0,,9.0,,8.0,3.0
+Cottonseed hull,cottonseed hull,waste,ingredient,bis_annex_c,7.0,42.0,,2.0,,8.0,42.0
+Bijda cake,bijda cake,waste,ingredient,bis_annex_c,26.0,30.0,,2.0,,5.0,30.0
+Paddy straw,paddy straw,crop_residue,forage,dey_2014_bihar,3.34,34.4,,0.79,,11.090000000000003,34.4
+Wheat straw,wheat straw,crop_residue,forage,dey_2014_bihar,3.26,32.27,,0.98,,8.120000000000005,32.27
+Maize stover,maize stover,crop_residue,forage,dey_2014_bihar,3.24,33.17,,0.85,,6.900000000000006,33.17
+Maize cobs,maize cobs,crop_residue,forage,dey_2014_bihar,2.94,36.8,,0.75,,7.109999999999999,36.8
+Lentil bhusa,lentil bhusa,crop_residue,forage,dey_2014_bihar,8.1,35.95,,1.24,,8.239999999999995,35.95
+Gram bhusa,gram bhusa,crop_residue,forage,dey_2014_bihar,8.48,39.5,,1.14,,9.400000000000006,39.5
+Mustard bhusa,mustard bhusa,crop_residue,forage,dey_2014_bihar,4.68,41.5,,1.31,,7.219999999999999,41.5
+Mung bhusa,mung bhusa,crop_residue,forage,dey_2014_bihar,10.65,28.68,,1.55,,8.400000000000006,28.68
+Urd bhusa,urd bhusa,crop_residue,forage,dey_2014_bihar,9.5,27.2,,0.78,,8.219999999999999,27.2
+Arhar bhusa,arhar bhusa,crop_residue,forage,dey_2014_bihar,13.05,37.88,,1.9,,9.549999999999997,37.88
+Wheat,wheat,grains,ingredient,dey_2014_bihar,9.34,5.03,,2.88,,6.719999999999999,5.03
+Rice grit,rice,grains,ingredient,dey_2014_bihar,8.38,1.1,,1.0,,7.180000000000007,1.1
+Maize,maize,grains,ingredient,dey_2014_bihar,9.77,2.39,,1.75,,11.599999999999994,2.39
+Gram flour,gram,grains,ingredient,dey_2014_bihar,18.2,9.8,,3.5,,9.840000000000003,9.8
+Wheat bran,wheat bran,byproducts,ingredient,dey_2014_bihar,14.67,11.21,,3.5,,10.049999999999997,11.21
+Rice bran,rice bran,byproducts,ingredient,dey_2014_bihar,9.88,23.01,,6.94,,9.620000000000005,23.01
+Rice polish,rice polish,byproducts,ingredient,dey_2014_bihar,13.52,6.65,,13.65,,9.200000000000003,6.65
+Deoiled rice bran,deoiled rice bran,byproducts,ingredient,dey_2014_bihar,15.32,17.48,,0.68,,9.799999999999997,17.48
+Mustard cake,mustard cake,oilcakes,ingredient,dey_2014_bihar,30.8,9.96,,8.33,,10.120000000000005,9.96
+Linseed cake,linseed cake,oilcakes,ingredient,dey_2014_bihar,32.68,8.65,,3.32,,9.780000000000001,8.65
+Til cake,til cake,oilcakes,ingredient,dey_2014_bihar,31.56,6.7,,5.5,,8.700000000000003,6.7
+Sugarcane tops,sugarcane tops,other,forage,dey_2014_bihar,5.04,32.98,,2.7,,62.57,32.98
+Local grass,local grass,other,forage,dey_2014_bihar,8.46,27.43,,1.7,,65.5,27.43
+Maize,maize,grains,ingredient,kannan_2017,9.29,,18.19,4.07,,,18.19
+Wheat,wheat,grains,ingredient,kannan_2017,11.14,,21.48,2.17,,,21.48
+Jowar,sorghum,grains,ingredient,kannan_2017,8.81,,18.42,2.72,,,18.42
+Broken rice,rice,grains,ingredient,kannan_2017,8.8,,23.2,1.98,,,23.2
+Wheat bran,wheat bran,byproducts,ingredient,kannan_2017,15.29,,53.14,3.24,,,53.14
+Deoiled rice bran,deoiled rice bran,byproducts,ingredient,kannan_2017,14.84,,50.65,0.65,,,50.65
+Rice polish,rice polish,byproducts,ingredient,kannan_2017,13.11,,39.4,13.76,,,39.4
+Groundnut meal,groundnut meal,oilcakes,ingredient,kannan_2017,42.67,,15.71,1.0,,,15.71
+Mustard cake,mustard cake,oilcakes,ingredient,kannan_2017,37.1,,24.52,7.88,,,24.52
+Deoiled mustard cake,mustard meal,oilcakes,ingredient,kannan_2017,37.31,,38.75,0.83,,,38.75
+Soybean meal,soybean meal,oilcakes,ingredient,kannan_2017,45.23,,21.5,1.12,,,21.5
+Groundnut cake,groundnut cake,oilcakes,ingredient,kannan_2017,42.11,,25.2,7.95,,,25.2
+Barley grain,barley,grains,ingredient,singh_2016,10.3,,41.4,1.52,,,41.4
+Chickpea husk,chickpea husk,byproducts,ingredient,singh_2016,4.5,,67.2,0.588,,,67.2
+Maize grain,maize,grains,ingredient,singh_2016,9.91,,36.4,4.7700000000000005,,,36.4
+Oat grain,oats,grains,ingredient,singh_2016,9.64,,35.1,5.2299999999999995,,,35.1
+Rice bran,rice bran,byproducts,ingredient,singh_2016,7.01,,66.8,4.5600000000000005,,,66.8
+Wheat bran A,wheat bran,byproducts,ingredient,singh_2016,13.2,,56.0,2.71,,,56.0
+Wheat bran B,wheat bran,byproducts,ingredient,singh_2016,15.4,,39.9,3.4899999999999998,,,39.9
+Wheat grain,wheat,grains,ingredient,singh_2016,11.7,,31.9,1.42,,,31.9
+Coconut cake,coconut cake,oilcakes,ingredient,singh_2016,25.4,,59.6,6.13,,,59.6
+Cotton seed cake,cottonseed cake,oilcakes,ingredient,singh_2016,24.0,,51.7,7.2,,,51.7
+Groundnut cake,groundnut cake,oilcakes,ingredient,singh_2016,33.2,,32.2,10.6,,,32.2
+Mustard seed cake,mustard cake,oilcakes,ingredient,singh_2016,34.8,,26.4,8.2,,,26.4
+wheat silage,wheat silage,silage,silage,hundal_2020,8.06,,68.6,2.15,2.0807999999999995,,68.6
+wheat silage,wheat silage,silage,silage,hundal_2020,7.72,,64.6,2.15,2.1456,,64.6
+wheat silage,wheat silage,silage,silage,hundal_2020,8.51,,64.5,1.9,2.2464,,64.5
+wheat silage,wheat silage,silage,silage,hundal_2020,7.25,,62.9,2.15,2.25,,62.9
+wheat silage,wheat silage,silage,silage,hundal_2020,8.8,,64.2,2.25,2.2561199999999997,,64.2
+wheat silage,wheat silage,silage,silage,hundal_2020,7.12,,62.6,2.2,2.2572,,62.6
+wheat silage,wheat silage,silage,silage,hundal_2020,9.7,,63.8,2.25,2.2932,,63.8
+wheat silage,wheat silage,silage,silage,hundal_2020,8.33,,61.2,2.0,2.2896,,61.2
+maize silage,maize silage,silage,silage,brar_2021,5.55,,73.6,1.77,2.23236,78.1,73.6
+maize silage,maize silage,silage,silage,brar_2021,8.44,,66.4,2.07,2.26152,80.47,66.4
+maize silage,maize silage,silage,silage,brar_2021,8.15,,65.5,2.07,2.25648,77.53,65.5

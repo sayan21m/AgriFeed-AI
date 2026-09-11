@@ -1,0 +1,6 @@
+min_score,max_score,class,advice
+81,1000,very_good,Good fermentation. Feed normally and keep silo face clean.
+61,80,good,Acceptable quality. Use soon and avoid heating at the face.
+41,60,satisfactory,Fair quality. Mix with better forage if animals refuse.
+21,40,moderate,Poor fermentation. Limit feeding and check for mould.
+-1000,20,poor,Reject or get a lab test. High pH or low DM risk.

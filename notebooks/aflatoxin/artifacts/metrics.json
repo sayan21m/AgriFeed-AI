@@ -1,0 +1,6 @@
+{
+  "model": "kotinagu_incidence_lookup",
+  "predicts_ppb": false,
+  "bis_afb1_max_ug_kg": 20,
+  "n_items": 8
+}

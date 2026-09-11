@@ -1,0 +1,8 @@
+{
+  "model": "flieg_from_pH_and_DM",
+  "formula": "220 + (2*DM - 15) - 40*pH",
+  "n_hundal": 8,
+  "n_brar": 3,
+  "kaur_n": 100,
+  "kaur_note": "percentiles, not raw pits"
+}

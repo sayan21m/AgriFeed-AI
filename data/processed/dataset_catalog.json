@@ -1,0 +1,94 @@
+[
+  {
+    "file": "raw/nddb/NDDB_Nutritive_Value_Feeds_Fodders_India_2012.pdf",
+    "processed": "processed/nddb_2012_concentrate_composition.csv",
+    "type": "c_reference_tables",
+    "use": "Primary feed-nutrient lookup"
+  },
+  {
+    "file": "raw/nddb/NDDB_Nutritive_Value_Feeds_Fodders_India_2012.pdf",
+    "processed": "processed/nddb_2012_roughage_composition.csv",
+    "type": "c_reference_tables",
+    "use": "Roughage lookup (straw, stover, silage, green fodder)"
+  },
+  {
+    "file": "raw/bis/IS_2052_2023_Compounded_Feeds_for_Cattle.pdf",
+    "processed": "processed/bis_is2052_2023_compounded_feed_limits.csv",
+    "type": "c_standard",
+    "use": "Pass/fail limits for compounded feed, urea, AIA, AFB1"
+  },
+  {
+    "file": "raw/bis/IS_2052_2009_Compounded_Cattle_Feeds.pdf",
+    "processed": "processed/bis_is2052_2009_annex_c_ingredient_typical_composition.csv",
+    "type": "c_standard",
+    "use": "Typical ingredient composition including AIA"
+  },
+  {
+    "file": "raw/icar_papers/Dey_2014_IJAnS_Bihar_feed_composition.pdf",
+    "processed": "processed/dey_2014_bihar_feed_composition.csv",
+    "type": "b_paper_table",
+    "use": "Extra Indian concentrate/roughage composition rows"
+  },
+  {
+    "file": "raw/icar_papers/Singh_2016_IJAnS_energy_protein_feeds.pdf",
+    "processed": "processed/singh_2016_indian_energy_protein_feeds.csv",
+    "type": "b_paper_table",
+    "use": "Extra Indian energy and protein feed rows"
+  },
+  {
+    "file": "raw/icar_papers/Kannan_2017_IJAnS_NW_Himalayan_concentrates.pdf",
+    "processed": "processed/kannan_2017_nw_himalayan_concentrates.csv",
+    "type": "b_paper_table",
+    "use": "NW Himalayan concentrate composition"
+  },
+  {
+    "file": "raw/icar_papers/Kaur_2026_IJDS_Punjab_farmer_silage.pdf",
+    "processed": "processed/kaur_2026_punjab_farmer_silage_summary_n100.csv",
+    "type": "b_paper_table",
+    "use": "Silage quality ranges and Flieg calibration (n=100 summary, not raw rows)"
+  },
+  {
+    "file": "raw/icar_papers/Hundal_2020_IJAnS_wheat_silage.pdf",
+    "processed": "processed/hundal_2020_wheat_silage.csv",
+    "type": "b_paper_table",
+    "use": "Experimental silage pH, acids, Flieg, TDN"
+  },
+  {
+    "file": "raw/icar_papers/Brar_2021_IJAgS_maize_cultivar_silage.pdf",
+    "processed": "processed/brar_2021_punjab_maize_cultivar_silage.csv",
+    "type": "b_paper_table",
+    "use": "Maize silage fermentation and nutrient demo rows"
+  },
+  {
+    "file": "raw/urea/Anitha_2022_ARCC_urea_foldscope_oilseed_cakes.pdf",
+    "processed": "processed/anitha_2022_urea_foldscope_yellow_area.csv",
+    "type": "b_paper_table",
+    "use": "Urea screening method thresholds"
+  },
+  {
+    "file": "raw/aflatoxin/Kotinagu_2015_VeterinaryWorld_AFB1.pdf",
+    "processed": "processed/kotinagu_2015_afb1_ap_telangana.csv",
+    "type": "b_paper_table",
+    "use": "AFB1 risk advisory, not ppb prediction"
+  },
+  {
+    "file": null,
+    "processed": "processed/flieg_score_rules.csv",
+    "type": "derived_rules",
+    "use": "Flieg class cut-points used by silage scoring"
+  },
+  {
+    "file": null,
+    "processed": "processed/farmer_advisory_rules.csv",
+    "type": "derived_rules",
+    "use": "Fused village-kit decision rules"
+  },
+  {
+    "file": "raw/nir/marcondes_2025_tropical_forage/Data.xlsx",
+    "processed": "processed/nir/marcondes_2025_tropical_forage_joined.csv",
+    "type": "a_raw_downloadable",
+    "use": "Paired portable NIR absorbance (890–1707 nm) + wet-lab CP/NDF/ADF for 291 Brazilian tropical forages. Pipeline demo only — not Indian cattle feed.",
+    "citation": "https://doi.org/10.6084/m9.figshare.28734674",
+    "license": "CC BY 4.0"
+  }
+]

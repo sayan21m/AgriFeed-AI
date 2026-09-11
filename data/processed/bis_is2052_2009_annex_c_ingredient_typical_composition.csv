@@ -1,0 +1,42 @@
+ingredient,category,moisture_pct,cp_pct,ee_pct,cf_pct,aia_pct
+Maize,grains,10.0,9.0,4.0,2.0,0.5
+Jowar,grains,9.0,8.0,3.0,1.0,0.2
+Bajra,grains,9.0,10.0,5.0,3.0,0.4
+Barley,grains,10.0,9.0,2.0,4.0,0.7
+Oat,grains,7.0,11.0,6.0,9.0,1.0
+Gram,grains,9.0,22.0,3.0,10.0,1.0
+Horse gram,grains,9.0,25.0,1.0,6.0,0.5
+Tuar chuni,byproducts,7.0,20.0,3.0,18.0,0.5
+Gram chuni,byproducts,8.0,17.0,1.0,15.0,2.0
+Arhar chuni,byproducts,7.0,18.0,2.0,9.0,4.0
+Mung chuni,byproducts,8.0,20.0,1.0,16.0,2.0
+Maize bran,byproducts,8.0,11.0,2.0,9.0,0.5
+Moth chuni,byproducts,7.0,13.0,3.0,12.0,5.0
+Wheat bran,byproducts,8.0,15.0,4.0,10.0,1.0
+Rice bran,byproducts,9.0,13.0,16.0,12.0,5.0
+Deoiled rice bran,byproducts,10.0,15.0,,15.0,5.0
+Guar meal,byproducts,9.0,46.0,5.0,7.0,1.0
+Gram husk,byproducts,8.0,6.0,1.0,48.0,5.0
+Rapeseed oil cake,oilcakes,9.0,34.0,8.0,8.0,2.0
+Rapeseed meal,oilcakes,10.0,38.0,,11.0,2.0
+Sunflower meal,oilcakes,10.0,28.0,,29.0,0.6
+Soyabean meal,oilcakes,10.0,45.0,,7.0,0.6
+Cottonseed oil cake (undecorticated),oilcakes,10.0,22.0,6.0,23.0,2.0
+Cottonseed meal,oilcakes,10.0,37.0,,15.0,1.5
+Coconut oil cake,oilcakes,9.0,23.0,8.0,8.0,0.5
+Coconut meal,oilcakes,10.0,27.0,,9.0,0.5
+Groundnut oil cake,oilcakes,10.0,42.0,8.0,7.0,1.5
+Groundnut meal,oilcakes,10.0,44.0,,11.0,1.5
+Maize cake,oilcakes,7.0,22.0,11.0,11.0,0.5
+Til oil cake,oilcakes,7.0,34.0,10.0,8.0,2.0
+Nigerseed oil cake,oilcakes,9.0,36.0,6.0,16.0,1.0
+Tapioca thippi,oilcakes,6.0,3.0,0.5,11.0,4.0
+Safflower meal,oilcakes,6.0,20.0,,33.0,1.0
+Linseed oil cake,oilcakes,7.0,32.0,5.0,9.0,1.5
+Babul chuni,waste,8.0,16.0,4.0,13.0,2.0
+Prosopis juliflora pods,waste,5.0,14.0,3.0,18.0,0.5
+Tamarind seed powder,waste,7.0,14.0,5.0,4.0,1.0
+Ambadi oil cake,waste,6.0,22.0,5.0,18.0,3.0
+Mango seed kernel,waste,8.0,6.0,9.0,3.0,0.5
+Cottonseed hull,waste,8.0,7.0,2.0,42.0,0.2
+Bijda cake,waste,5.0,26.0,2.0,30.0,5.0

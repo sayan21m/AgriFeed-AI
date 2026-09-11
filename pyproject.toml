@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smartfeed-india"
+version = "1.3.0"
+description = "SIH26111 rapid, low-cost cattle feed and silage quality kit"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "python-multipart>=0.0.9",
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "scikit-learn>=1.8",
+    "joblib>=1.3",
+    "scipy>=1.11",
+    "Pillow>=10.0",
+    "openpyxl>=3.1",
+]
+
+[project.scripts]
+smartfeed = "smartfeed.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "httpx>=0.27"]
+ml = ["torch>=2.0"]
+
+[tool.setuptools]
+packages = ["smartfeed", "app", "app.sensors"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::UserWarning:sklearn.base"]

@@ -1,0 +1,12 @@
+Dataset: Marcondes et al. (2025)
+Title: Prediction of the chemical composition and ruminal degradability of
+Urochloa, Megathyrsus, and Pennisetum genus forages using near-infrared
+spectroscopy and multivariate regression
+DOI: https://doi.org/10.6084/m9.figshare.28734674
+License: CC BY 4.0
+Instrument: ITPhotonics poliSPECNIR 900–1700 (dried, ground forage)
+n: 291 tropical forage samples (Brazil), paired absorbance + wet chemistry
+File: Data.xlsx downloaded from https://ndownloader.figshare.com/files/53431202
+
+This is NOT Indian cattle-feed or compounded-feed NIR. Do not report these
+calibrations as SmartFeed India bag protein.

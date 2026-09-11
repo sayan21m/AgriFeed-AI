@@ -1,0 +1,1 @@
+"""SmartFeed India web application."""

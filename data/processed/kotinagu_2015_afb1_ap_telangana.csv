@@ -1,0 +1,9 @@
+item,group,n_analyzed,n_positive,incidence_pct,mean_ppb,range_ppb
+Cattle feed,compound,24,6,26,32,20-60
+Poultry feed,compound,17,6,35.2,13.4,10-20
+Cotton seed cake,ingredient,7,3,42.8,23.3,10-40
+Groundnut cake,ingredient,5,3,60,23.3,20-30
+Soyabean cake,ingredient,3,1,33.3,50,
+Maize,ingredient,13,5,38.4,62,
+Wheat bran,ingredient,2,0,0,,
+Deoiled rice bran,ingredient,4,0,0,,

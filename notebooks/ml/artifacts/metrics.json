@@ -1,0 +1,37 @@
+{
+  "disclaimer": "This model does not measure crude protein from a moisture sensor or a photo. Known ingredients return the min-max range of Indian tables (NDDB, BIS, ICAR papers). Unknown names are classified into a feed class, then a class-level estimate is used.",
+  "n_training_rows": 133,
+  "n_canonical_ingredients": 77,
+  "name_classifier_cv_accuracy": 0.796,
+  "name_classifier_winner": "ExtraTrees + TF-IDF",
+  "cp_model_winner": "Ridge + TF-IDF",
+  "cp_cv_mae": 5.111,
+  "nutrient_models": [
+    {
+      "target": "cp_pct_dm",
+      "n": 108,
+      "cv": "leave_one_ingredient_out",
+      "winner": "Ridge + TF-IDF",
+      "mae": 5.111
+    },
+    {
+      "target": "fibre_pct_dm",
+      "n": 106,
+      "cv": "fitted_same_architecture_as_cp_winner",
+      "winner": "Ridge + TF-IDF"
+    },
+    {
+      "target": "ee_pct_dm",
+      "n": 104,
+      "cv": "fitted_same_architecture_as_cp_winner",
+      "winner": "Ridge + TF-IDF"
+    },
+    {
+      "target": "me_mcal_kg",
+      "n": 46,
+      "cv": "fitted_same_architecture_as_cp_winner",
+      "winner": "Ridge + TF-IDF"
+    }
+  ],
+  "artifact": "notebooks/ml/artifacts/nutrition_estimator.joblib"
+}

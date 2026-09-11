@@ -1,0 +1,30 @@
+{
+  "pack": "smartfeed-models",
+  "version": "1.2.0",
+  "updated": "2026-09-10",
+  "note": "Replace a file in models/, then tap Update in the app (POST /api/models/reload). Notebooks remain the training source.",
+  "files": [
+    {
+      "id": "nutrition",
+      "file": "nutrition_estimator.joblib",
+      "role": "ExtraTrees name class + Ridge CP",
+      "bytes": 2629759,
+      "sha256_16": "e750decba7c6cd53"
+    },
+    {
+      "id": "nir",
+      "file": "nir_forage_estimator.joblib",
+      "role": "Brazilian forage PLS (not Indian bags)",
+      "bytes": 396265,
+      "sha256_16": "c8b23cf01e8d749b"
+    },
+    {
+      "id": "mould",
+      "file": "mould_vision.pt",
+      "role": "CNN mould screen on 32\u00d732 RGB",
+      "bytes": 98707,
+      "sha256_16": "db080a2afe4746b5"
+    }
+  ],
+  "total_bytes": 3124731
+}

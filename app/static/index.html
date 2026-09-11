@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1f3d28" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="SmartFeed" />
+  <title>SmartFeed India</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/static/icon-192.png" />
+  <link rel="icon" href="/static/icon-192.png" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="appbar">
+      <div>
+        <p class="kicker" data-i18n="kicker">SIH26111 · DAHD</p>
+        <h1 data-i18n="title">SmartFeed</h1>
+      </div>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" id="lang-en" class="on">EN</button>
+        <button type="button" id="lang-hi">हिं</button>
+      </div>
+    </header>
+
+    <p id="install-bar" class="install hidden">
+      <span data-i18n="install">Install this app on the phone for more storage.</span>
+      <button type="button" id="install-btn" data-i18n="install_btn">Add</button>
+    </p>
+
+    <main>
+      <section id="screen-test" class="screen">
+        <div class="kitbar">
+          <div>
+            <p class="kit-label" data-i18n="kit">ESP32 kit</p>
+            <p id="kit-status" class="note" data-i18n="kit_idle">No reading yet. Power the board or simulate.</p>
+          </div>
+          <button type="button" id="kit-pull" class="ghost" data-i18n="kit_pull">Use kit</button>
+        </div>
+
+        <form id="kit">
+          <label>
+            <span data-i18n="ingredient">What is this feed?</span>
+            <input id="ingredient" name="ingredient" list="ingredient-list" required autocomplete="off"
+              placeholder="mustard cake / sarson khali / maize silage" />
+            <datalist id="ingredient-list"></datalist>
+          </label>
+
+          <fieldset>
+            <legend data-i18n="form">Form</legend>
+            <label class="chip"><input type="radio" name="form" value="ingredient" checked /> <span data-i18n="form_ing">Ingredient</span></label>
+            <label class="chip"><input type="radio" name="form" value="silage" /> <span data-i18n="form_sil">Silage</span></label>
+            <label class="chip"><input type="radio" name="form" value="compounded" /> <span data-i18n="form_cmp">Compounded</span></label>
+          </fieldset>
+
+          <div class="grid2">
+            <label>
+              <span data-i18n="moisture">Moisture %</span>
+              <input id="moisture" name="moisture_pct" type="number" min="0" max="90" step="0.1" inputmode="decimal" />
+            </label>
+            <label id="ph-wrap">
+              <span data-i18n="ph">Silage pH</span>
+              <input id="ph" name="ph" type="number" min="3" max="8" step="0.01" inputmode="decimal" />
+            </label>
+          </div>
+
+          <div class="grid2">
+            <label>
+              <span data-i18n="urea">4-DMAB yellow %</span>
+              <input id="urea" name="urea_yellow_area_pct" type="number" min="0" max="100" step="0.1" inputmode="decimal" />
+            </label>
+            <label class="check">
+              <input id="mould" name="visible_mould" type="checkbox" />
+              <span data-i18n="mould">Visible mould</span>
+            </label>
+          </div>
+
+          <details class="more">
+            <summary data-i18n="sand">Sand / silica</summary>
+            <div class="grid2">
+              <label>
+                <span data-i18n="grit">Settled grit (ml)</span>
+                <input id="grit" name="grit_settled_ml" type="number" min="0" max="1000" step="0.1" inputmode="decimal" />
+              </label>
+              <label>
+                <span data-i18n="sample_g">Sample weight (g)</span>
+                <input id="sample_g" name="sample_g" type="number" min="1" max="10000" step="1" inputmode="numeric" />
+              </label>
+            </div>
+            <label>
+              <span data-i18n="aia">AIA % (if lab tested)</span>
+              <input id="aia" name="aia_pct" type="number" min="0" max="100" step="0.01" inputmode="decimal" />
+            </label>
+          </details>
+
+          <label class="photo-btn">
+            <span data-i18n="photo">Phone photo (mould)</span>
+            <input id="photo" name="photo" type="file" accept="image/*" capture="environment" />
+          </label>
+          <img id="photo-preview" class="preview hidden" alt="" />
+
+          <button type="submit" class="go" data-i18n="test">Test now</button>
+        </form>
+      </section>
+
+      <section id="screen-result" class="screen hidden">
+        <div id="result-empty" class="empty">
+          <p data-i18n="result_empty">Run a test. The verdict will show here.</p>
+        </div>
+        <div id="result" class="hidden" aria-live="polite"></div>
+      </section>
+
+      <section id="screen-models" class="screen hidden">
+        <p class="lead" data-i18n="models_lead">Models live on this device pack, not inside a web page. Replace a file in models/ and tap Update.</p>
+        <p id="models-meta" class="note"></p>
+        <ul id="models-list" class="model-list"></ul>
+        <button type="button" id="models-update" class="go" data-i18n="models_update">Update & reload</button>
+        <p id="models-status" class="note"></p>
+      </section>
+    </main>
+
+    <nav class="tabbar" aria-label="App">
+      <button type="button" class="tab on" data-screen="test" data-i18n="tab_test">Test</button>
+      <button type="button" class="tab" data-screen="result" data-i18n="tab_result">Verdict</button>
+      <button type="button" class="tab" data-screen="models" data-i18n="tab_models">Models</button>
+    </nav>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

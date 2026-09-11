@@ -1,0 +1,13 @@
+characteristic,unit,type_I,type_II,basis
+Moisture,"% as-fed, max",11,11,as_fed
+Crude protein,"% DM, min",22,20,moisture_free
+Crude fat,"% DM, min",4.0,3.0,moisture_free
+Crude fibre,"% DM, max",10,12,moisture_free
+Acid insoluble ash,"% DM, max",2.5,3.0,moisture_free
+Salt as NaCl,"% DM, max",1.0,1.0,moisture_free
+Calcium,"% DM, min",0.8,0.8,moisture_free
+Total phosphorus,"% DM, min",0.5,0.5,moisture_free
+Available phosphorus,"% DM, min",0.25,0.25,moisture_free
+Urea,"% DM, max",1.0,1.0,moisture_free
+Aflatoxin B1,"ug/kg, max",20,20,moisture_free
+Cadmium,"mg/kg, max",0.5,0.5,moisture_free

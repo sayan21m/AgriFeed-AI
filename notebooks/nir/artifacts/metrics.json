@@ -1,0 +1,31 @@
+{
+  "source": "https://doi.org/10.6084/m9.figshare.28734674",
+  "n_samples": 291,
+  "n_wavelengths": 256,
+  "wavelength_nm_min": 889.995,
+  "wavelength_nm_max": 1707.108,
+  "cv": "leave_one_species_out",
+  "cp": {
+    "winner": "PLS8 + SNV + SG1",
+    "logo_mae": 1.3850536483130576,
+    "logo_r2": 0.753358299598746,
+    "kfold_mae": 1.197096191518099,
+    "unit": "% DM"
+  },
+  "ndf": {
+    "winner": "PLS8 + SNV",
+    "logo_mae": 3.787922373676091,
+    "logo_r2": 0.5013983420824842,
+    "unit": "% DM"
+  },
+  "adf": {
+    "winner": "PLS8 + SNV",
+    "logo_mae": 2.5608423329365686,
+    "logo_r2": 0.6067418842578143,
+    "unit": "% DM"
+  },
+  "ann_cp_logo_mae": 2.079323785825686,
+  "name_model_cp_mae_for_comparison": 5.111,
+  "disclaimer": "Calibrated on Brazilian tropical forage NIR (Marcondes 2025). Do not use on Indian oilcakes, bran, silage, or compounded cattle feed.",
+  "artifact": "notebooks/nir/artifacts/nir_forage_estimator.joblib"
+}

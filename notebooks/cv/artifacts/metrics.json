@@ -1,0 +1,29 @@
+{
+  "model": "hsv + cnn",
+  "public_feed_bag_images": 0,
+  "grainset_tiny_skipped_mb": 695,
+  "predicts_afb1_ppb": false,
+  "test": [
+    {
+      "model": "cnn",
+      "acc": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "model": "HSV colour screen",
+      "acc": 0.5375,
+      "f1": 0.6595092024539877,
+      "precision": 0.4976851851851852,
+      "recall": 0.9772727272727273
+    }
+  ],
+  "deployed": "cnn",
+  "hsv_vs_dl": {
+    "note": "Held-out synthetic 32x32 patches: clean cake, clean bran, uniform green silage (HSV false-positive), and mould blotches on brown. Not Indian bag photos. Not AFB1 ppb."
+  },
+  "n_train": 1920,
+  "n_test": 480,
+  "image_size": 32
+}

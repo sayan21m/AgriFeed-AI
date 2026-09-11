@@ -1,0 +1,9 @@
+rule_id,module,condition,action
+SILAGE_PH_DM,silage,compute Flieg = 220 + (2*DM_pct - 15) - 40*pH,Use flieg_score_rules.csv class
+SILAGE_HIGH_PH,silage,pH > 4.2 and DM_pct < 30,Flag poor fermentation even before Flieg
+FEED_LOOKUP,nutrient,farmer selects ingredient,"Return NDDB/BIS/Dey typical CP, CF, EE, ash, TDN/ME"
+COMPOUND_BIS,nutrient,sample is compounded cattle feed,"Compare moisture, CP, fat, CF, AIA against IS 2052:2023 Type I/II"
+UREA_DMAB,adulteration,4-DMAB yellow on oilcake,Suspect urea; BIS max 1% if urea is declared
+AIA_SAND,adulteration,AIA above 2.5% (Type I) or 3.0% (Type II),Possible sand/silica contamination
+MOULD_MOISTURE,mould,visible mould or moisture high in store,Do not claim ppb; advise reject or lab AFB1 test
+AFB1_RISK,mycotoxin,"maize or groundnut cake, monsoon, poor storage",High-risk ingredient; BIS AFB1 max 20 ug/kg

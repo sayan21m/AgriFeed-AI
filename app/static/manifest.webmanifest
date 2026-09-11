@@ -1,0 +1,16 @@
+{
+  "name": "SmartFeed India",
+  "short_name": "SmartFeed",
+  "description": "Village cattle feed and silage kit. Feed, mix, or reject.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1f3d28",
+  "theme_color": "#1f3d28",
+  "lang": "en",
+  "icons": [
+    { "src": "/static/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/static/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
